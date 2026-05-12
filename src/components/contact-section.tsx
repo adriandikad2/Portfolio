@@ -1,0 +1,143 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Globe, Mail, Heart } from "lucide-react";
+import { GithubIcon, YoutubeIcon } from "@/components/ui/brand-icons";
+import { cn } from "@/lib/utils";
+
+const socialLinks = [
+  {
+    label: "GitHub",
+    href: "https://github.com",
+    icon: GithubIcon,
+    color: "#e4e4e7",
+  },
+  {
+    label: "YouTube",
+    href: "https://youtube.com",
+    icon: YoutubeIcon,
+    color: "#ff0000",
+  },
+  {
+    label: "Portfolio",
+    href: "#hero",
+    icon: Globe,
+    color: "#00d4ff",
+  },
+  {
+    label: "Email",
+    href: "mailto:hello@adrian.dev",
+    icon: Mail,
+    color: "#a855f7",
+  },
+];
+
+export function ContactSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  return (
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="relative py-32 px-6"
+    >
+      {/* Background spotlight */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#00d4ff]/[0.02] blur-[120px]" />
+      </div>
+
+      <div className="mx-auto max-w-3xl text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="relative mb-6 flex items-center justify-center">
+            <div className="absolute h-[1px] w-48 bg-gradient-to-r from-transparent via-[#00d4ff]/40 to-transparent" />
+            <div className="absolute h-16 w-48 rounded-full bg-[#00d4ff]/5 blur-2xl" />
+          </div>
+
+          <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.25em] text-[#00d4ff]">
+            // contact
+          </span>
+          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+            <span className="bg-gradient-to-r from-[#e4e4e7] to-[#a1a1aa] bg-clip-text text-transparent">
+              Let&apos;s Build Something
+            </span>
+          </h2>
+          <p className="mt-4 text-[#71717a] max-w-md mx-auto">
+            Interested in collaborating, have a question, or just want to connect?
+            Reach out through any of these channels.
+          </p>
+        </motion.div>
+
+        {/* Social links */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-12 flex items-center justify-center gap-4"
+        >
+          {socialLinks.map((link, idx) => (
+            <motion.a
+              key={link.label}
+              href={link.href}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{
+                duration: 0.5,
+                delay: 0.4 + idx * 0.1,
+                type: "spring",
+                stiffness: 200,
+              }}
+              whileHover={{ scale: 1.15, y: -4 }}
+              whileTap={{ scale: 0.9 }}
+              className={cn(
+                "group flex flex-col items-center gap-2",
+              )}
+            >
+              <div
+                className={cn(
+                  "flex h-14 w-14 items-center justify-center rounded-2xl",
+                  "border border-[#27272a] bg-[#12121a]",
+                  "transition-all duration-300",
+                  "group-hover:border-[#00d4ff]/40",
+                  "group-hover:shadow-[0_0_25px_rgba(0,212,255,0.1)]"
+                )}
+              >
+                <link.icon
+                  className="h-6 w-6 text-[#71717a] transition-colors duration-300 group-hover:text-[#00d4ff]"
+                />
+              </div>
+              <span className="text-[10px] font-mono text-[#52525b] group-hover:text-[#71717a] transition-colors">
+                {link.label}
+              </span>
+            </motion.a>
+          ))}
+        </motion.div>
+
+        {/* Divider */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-20"
+        >
+          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#27272a] to-transparent" />
+          <div className="mt-8 flex flex-col items-center gap-2">
+            <p className="flex items-center gap-1.5 text-xs text-[#52525b]">
+              Built with
+              <Heart className="h-3 w-3 text-[#f43f5e] fill-[#f43f5e]" />
+              using Next.js, Tailwind CSS & Framer Motion
+            </p>
+            <p className="font-mono text-[10px] text-[#3f3f46]">
+              © {new Date().getFullYear()} Adrian. All rights reserved.
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
