@@ -53,7 +53,7 @@ export function HeroSection() {
           className="mb-2 text-7xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl"
         >
           <span className="bg-gradient-to-r from-[#e4e4e7] via-[#e4e4e7] to-[#71717a] bg-clip-text text-transparent">
-            Adrian
+            Adrian Dika
           </span>
         </motion.h1>
 
@@ -74,12 +74,11 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 1.4 }}
           className="mx-auto mb-10 max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed"
         >
-          Bridging complex system architecture with immersive world-building.
+          A little bit about my projects, passions, and powers.
           <br className="hidden sm:block" />
           <span className="text-muted-foreground">
-            From Luau game logic to full-stack web platforms —
-          </span>{" "}
-          crafting interactive experiences that push boundaries.
+            Major interests in the whole process of game development, from planning, conceptualizations, draft sketches, codes, arts, asset creations, marketing & research, community building and managing, sound design, and more.
+          </span>
         </motion.p>
 
         {/* CTAs */}
@@ -93,7 +92,7 @@ export function HeroSection() {
             <ArrowDown className="h-4 w-4" />
             View Projects
           </ShimmerButton>
-          <OutlineButton href="#">
+          <OutlineButton href="#" target="_blank">
             <FileText className="h-4 w-4" />
             View Resume
           </OutlineButton>

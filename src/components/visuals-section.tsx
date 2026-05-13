@@ -3,10 +3,10 @@
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Eye } from "lucide-react";
 import { GalleryModal } from "@/components/ui/gallery-modal";
 import type { GalleryItem } from "@/data/portfolio-data";
 import { Linkify } from "@/components/ui/linkify";
+import { TechTag } from "@/components/ui/tech-tag";
 
 import { visualItems } from "@/data/portfolio-data";
 import type { VisualItem } from "@/data/portfolio-data";
@@ -113,8 +113,12 @@ function VisualCard({
     return () => clearInterval(interval);
   }, [currentIndex, item.gallery.length, onIndexChange]);
 
-  const currentImage = item.gallery[currentIndex]?.image || item.image;
-  const currentColor = item.gallery[currentIndex]?.color || item.color;
+  const safeIndex = item.gallery && item.gallery.length > 0 
+    ? (currentIndex >= item.gallery.length ? 0 : currentIndex) 
+    : 0;
+  const currentGalleryItem = item.gallery[safeIndex];
+  const currentImage = currentGalleryItem?.image || item.image;
+  const currentColor = currentGalleryItem?.color || item.color;
 
   return (
     <motion.div
@@ -178,9 +182,7 @@ function VisualCard({
 
         {/* Center label */}
         <div className="absolute inset-0 flex items-center justify-center z-30">
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70 group-hover:text-muted-foreground transition-colors">
-            {item.category}
-          </span>
+          <TechTag tag={item.category} className="uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-background/80 backdrop-blur-sm border-white/10" />
         </div>
 
         {/* Hover overlay */}
@@ -193,7 +195,7 @@ function VisualCard({
                 </p>
                 <div className="text-[11px] text-muted-foreground line-clamp-2 hover:line-clamp-none transition-all duration-300">
                   {(() => {
-                    const desc = item.gallery[currentIndex]?.description || item.description;
+                    const desc = currentGalleryItem?.description || item.description;
                     if (desc.includes("EN 🇬🇧:")) {
                       const parts = desc.split("EN 🇬🇧:");
                       return (
@@ -209,9 +211,11 @@ function VisualCard({
                   })()}
                 </div>
               </div>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20">
-                <Eye className="h-3.5 w-3.5 text-primary" />
-              </div>
+            </div>
+            <div className="mt-4">
+              <span className="block text-base font-bold text-primary/80 transition-colors duration-300 group-hover:text-primary text-center">
+                Click to see more
+              </span>
             </div>
           </div>
         </div>
@@ -219,16 +223,16 @@ function VisualCard({
         {/* Category badge */}
         <div className="absolute left-3 top-3 z-50">
           <span className="rounded-md border border-border/60 bg-background/60 px-2 py-0.5 text-[10px] font-mono text-muted-foreground backdrop-blur-sm">
-            {currentIndex + 1} / {item.gallery.length}
+            {safeIndex + 1} / {item.gallery.length}
           </span>
         </div>
 
         {/* Image title overlay */}
-        {(item.gallery[currentIndex]?.imageLabel || item.gallery[currentIndex]?.title) && (
+        {(currentGalleryItem?.imageLabel || currentGalleryItem?.title) && (
           <div className="absolute bottom-0 left-0 right-0 z-50">
             <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent px-3 pt-5 pb-2.5">
               <p className="text-[10px] font-medium text-white/90 drop-shadow-md line-clamp-1">
-                {item.gallery[currentIndex].imageLabel || item.gallery[currentIndex].title}
+                {currentGalleryItem.imageLabel || currentGalleryItem.title}
               </p>
             </div>
           </div>

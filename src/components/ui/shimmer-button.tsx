@@ -10,6 +10,7 @@ interface ShimmerButtonProps {
   shimmerSize?: string;
   onClick?: () => void;
   href?: string;
+  target?: string;
 }
 
 export function ShimmerButton({
@@ -18,6 +19,7 @@ export function ShimmerButton({
   shimmerColor = "#00d4ff",
   onClick,
   href,
+  target,
 }: ShimmerButtonProps) {
   const content = (
     <motion.span
@@ -47,7 +49,15 @@ export function ShimmerButton({
   );
 
   if (href) {
-    return <a href={href}>{content}</a>;
+    return (
+      <a 
+        href={href} 
+        target={target} 
+        rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      >
+        {content}
+      </a>
+    );
   }
 
   return content;
@@ -58,6 +68,7 @@ interface OutlineButtonProps {
   className?: string;
   onClick?: () => void;
   href?: string;
+  target?: string;
 }
 
 export function OutlineButton({
@@ -65,6 +76,7 @@ export function OutlineButton({
   className,
   onClick,
   href,
+  target,
 }: OutlineButtonProps) {
   const content = (
     <motion.span
@@ -97,7 +109,15 @@ export function OutlineButton({
   );
 
   if (href) {
-    return <a href={href}>{content}</a>;
+    return (
+      <a 
+        href={href} 
+        target={target} 
+        rel={target === "_blank" ? "noopener noreferrer" : undefined}
+      >
+        {content}
+      </a>
+    );
   }
 
   return content;

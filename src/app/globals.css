@@ -186,19 +186,6 @@
 }
 
 /* ============================================
-   Tech Tag
-   ============================================ */
-.tech-tag {
-  @apply inline-flex items-center px-3 py-1 rounded-md text-xs font-mono
-         bg-cyan-glow/10 text-cyan-glow border border-cyan-glow/20
-         transition-all duration-300;
-}
-.tech-tag:hover {
-  @apply bg-cyan-glow/20 border-cyan-glow/40;
-  box-shadow: 0 0 10px rgba(0, 212, 255, 0.15);
-}
-
-/* ============================================
    Keyframe Animations
    ============================================ */
 @keyframes shimmer {

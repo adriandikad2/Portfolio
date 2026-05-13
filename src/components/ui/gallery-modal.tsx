@@ -44,8 +44,11 @@ export function GalleryModal({
     };
   }, [isOpen]);
 
+  const safeIndex = currentIndex >= items.length ? 0 : currentIndex;
+  const currentItem = items[safeIndex];
+
   const handleClose = () => {
-    onClose(currentIndex);
+    onClose(safeIndex);
   };
 
   useEffect(() => {
@@ -60,8 +63,6 @@ export function GalleryModal({
   }, [isOpen, items.length, onClose]);
 
   if (!isOpen || !items || items.length === 0) return null;
-
-  const currentItem = items[currentIndex];
 
   const handleNext = (e: React.MouseEvent) => {
     e.stopPropagation();
