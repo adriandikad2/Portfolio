@@ -61,7 +61,7 @@ export function HeroSection() {
         <div className="mb-6">
           <TextGenerateEffect
             words="Game Developer & Engineer"
-            className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#00d4ff] to-[#a855f7] bg-clip-text text-transparent"
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#00d4ff] text-glow-cyan"
             delay={0.8}
             duration={0.6}
           />

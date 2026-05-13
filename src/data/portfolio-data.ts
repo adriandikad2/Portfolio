@@ -6,7 +6,7 @@ export const siteConfig = {
   title: "Adrian — Game Developer & Engineer",
   description:
     "Portfolio of Adrian, a Computer Engineering student at Universitas Indonesia specializing in game development, full-stack architecture, and 3D world building.",
-  url: "https://adrian.dev",
+  url: "https://adrian.vercel.app",
 } as const;
 
 export const navItems = [
@@ -147,8 +147,8 @@ export const projects: Project[] = [
 ];
 
 export const socialLinks = [
-  { label: "GitHub", href: "https://github.com", icon: GithubIcon },
-  { label: "YouTube", href: "https://youtube.com", icon: YoutubeIcon },
+  { label: "GitHub", href: "https://github.com/adriandikad2", icon: GithubIcon },
+  { label: "YouTube", href: "https://www.youtube.com/@Randm", icon: YoutubeIcon },
   { label: "Portfolio", href: "#", icon: Globe },
   { label: "Design", href: "#", icon: PenTool },
 ];
