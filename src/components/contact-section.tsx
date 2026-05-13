@@ -45,7 +45,7 @@ export function ContactSection() {
     >
       {/* Background spotlight */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#00d4ff]/[0.02] blur-[120px]" />
+        <div className="absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-primary/[0.02] blur-[120px]" />
       </div>
 
       <div className="mx-auto max-w-3xl text-center">
@@ -56,10 +56,10 @@ export function ContactSection() {
         >
           <div className="relative mb-6 flex items-center justify-center">
             <div className="absolute h-[1px] w-48 bg-gradient-to-r from-transparent via-[#00d4ff]/40 to-transparent" />
-            <div className="absolute h-16 w-48 rounded-full bg-[#00d4ff]/5 blur-2xl" />
+            <div className="absolute h-16 w-48 rounded-full bg-primary/5 blur-2xl" />
           </div>
 
-          <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.25em] text-[#00d4ff]">
+          <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.25em] text-primary">
             // contact
           </span>
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
@@ -67,7 +67,7 @@ export function ContactSection() {
               Let&apos;s Build Something
             </span>
           </h2>
-          <p className="mt-4 text-[#71717a] max-w-md mx-auto">
+          <p className="mt-4 text-muted-foreground max-w-md mx-auto">
             Interested in collaborating, have a question, or just want to connect?
             Reach out through any of these channels.
           </p>
@@ -101,17 +101,17 @@ export function ContactSection() {
               <div
                 className={cn(
                   "flex h-14 w-14 items-center justify-center rounded-2xl",
-                  "border border-[#27272a] bg-[#12121a]",
+                  "border border-border bg-card",
                   "transition-all duration-300",
-                  "group-hover:border-[#00d4ff]/40",
+                  "group-hover:border-primary/40",
                   "group-hover:shadow-[0_0_25px_rgba(0,212,255,0.1)]"
                 )}
               >
                 <link.icon
-                  className="h-6 w-6 text-[#71717a] transition-colors duration-300 group-hover:text-[#00d4ff]"
+                  className="h-6 w-6 text-muted-foreground transition-colors duration-300 group-hover:text-primary"
                 />
               </div>
-              <span className="text-[10px] font-mono text-[#52525b] group-hover:text-[#71717a] transition-colors">
+              <span className="text-[10px] font-mono text-muted-foreground/70 group-hover:text-muted-foreground transition-colors">
                 {link.label}
               </span>
             </motion.a>
@@ -127,7 +127,7 @@ export function ContactSection() {
         >
           <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#27272a] to-transparent" />
           <div className="mt-8 flex flex-col items-center gap-2">
-            <p className="flex items-center gap-1.5 text-xs text-[#52525b]">
+            <p className="flex items-center gap-1.5 text-xs text-muted-foreground/70">
               Built with
               <Heart className="h-3 w-3 text-[#f43f5e] fill-[#f43f5e]" />
               using Next.js, Tailwind CSS & Framer Motion

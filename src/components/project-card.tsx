@@ -11,9 +11,10 @@ interface ProjectCardProps {
   project: Project;
   index: number;
   isInView: boolean;
+  onViewGallery?: () => void;
 }
 
-export function ProjectCard({ project, index, isInView }: ProjectCardProps) {
+export function ProjectCard({ project, index, isInView, onViewGallery }: ProjectCardProps) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -51,10 +52,10 @@ export function ProjectCard({ project, index, isInView }: ProjectCardProps) {
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={cn(
-          "relative rounded-2xl border border-[#27272a]/60 p-1",
-          "bg-[#12121a]/60 backdrop-blur-sm",
+          "relative rounded-2xl border border-border/60 p-1",
+          "bg-card/60 backdrop-blur-sm",
           "transition-colors duration-500",
-          "hover:border-[#00d4ff]/30",
+          "hover:border-primary/30",
           "overflow-hidden"
         )}
       >
@@ -74,7 +75,7 @@ export function ProjectCard({ project, index, isInView }: ProjectCardProps) {
 
         <div
           className={cn(
-            "relative z-10 flex flex-col gap-6 rounded-xl bg-[#0a0a0f]/80 p-6 sm:p-8",
+            "relative z-10 flex flex-col gap-6 rounded-xl bg-background/80 p-6 sm:p-8",
             "lg:flex-row lg:items-center lg:gap-10",
             isReversed && "lg:flex-row-reverse"
           )}
@@ -84,11 +85,11 @@ export function ProjectCard({ project, index, isInView }: ProjectCardProps) {
             <div
               className={cn(
                 "aspect-video w-full rounded-xl",
-                "bg-gradient-to-br from-[#1a1a2e] via-[#12121a] to-[#0a0a0f]",
-                "border border-[#27272a]/40",
+                "bg-gradient-to-br from-secondary via-[#12121a] to-background",
+                "border border-border/40",
                 "flex items-center justify-center",
                 "transition-all duration-500",
-                "group-hover:border-[#00d4ff]/20"
+                "group-hover:border-primary/20"
               )}
             >
               {/* Grid pattern inside placeholder */}
@@ -102,11 +103,11 @@ export function ProjectCard({ project, index, isInView }: ProjectCardProps) {
               />
               {/* Project ID label */}
               <div className="relative z-10 text-center">
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#52525b]">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70">
                   {project.id}
                 </span>
-                <div className="mt-2 h-8 w-8 mx-auto rounded-full border border-[#27272a] flex items-center justify-center">
-                  <div className="h-2 w-2 rounded-full bg-[#00d4ff]/40" />
+                <div className="mt-2 h-8 w-8 mx-auto rounded-full border border-border flex items-center justify-center">
+                  <div className="h-2 w-2 rounded-full bg-primary/40" />
                 </div>
               </div>
             </div>
@@ -115,17 +116,17 @@ export function ProjectCard({ project, index, isInView }: ProjectCardProps) {
           {/* Content */}
           <div className="flex-1 space-y-4">
             {/* Subtitle */}
-            <span className="inline-block font-mono text-[10px] uppercase tracking-[0.2em] text-[#00d4ff]">
+            <span className="inline-block font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
               {project.subtitle}
             </span>
 
             {/* Title */}
-            <h3 className="text-2xl font-bold tracking-tight text-[#e4e4e7] sm:text-3xl">
+            <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               {project.title}
             </h3>
 
             {/* Description */}
-            <p className="text-sm leading-relaxed text-[#71717a]">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               {project.description}
             </p>
 
@@ -149,9 +150,9 @@ export function ProjectCard({ project, index, isInView }: ProjectCardProps) {
                   className={cn(
                     "inline-flex items-center gap-2 rounded-lg px-4 py-2",
                     "text-xs font-medium",
-                    "border border-[#27272a] bg-[#12121a]",
-                    "text-[#a1a1aa] transition-all duration-300",
-                    "hover:border-[#00d4ff]/40 hover:text-[#00d4ff]",
+                    "border border-border bg-card",
+                    "text-muted-foreground transition-all duration-300",
+                    "hover:border-primary/40 hover:text-primary",
                     "hover:shadow-[0_0_15px_rgba(0,212,255,0.1)]"
                   )}
                 >
@@ -164,6 +165,23 @@ export function ProjectCard({ project, index, isInView }: ProjectCardProps) {
                   {link.label}
                 </motion.a>
               ))}
+              {project.gallery && project.gallery.length > 0 && (
+                <motion.button
+                  onClick={onViewGallery}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={cn(
+                    "inline-flex items-center gap-2 rounded-lg px-4 py-2",
+                    "text-xs font-medium",
+                    "bg-primary/10 border border-primary/30 text-primary",
+                    "transition-all duration-300",
+                    "hover:bg-primary/20 hover:border-primary/50",
+                    "hover:shadow-[0_0_15px_rgba(0,212,255,0.2)]"
+                  )}
+                >
+                  View Gallery
+                </motion.button>
+              )}
             </div>
           </div>
         </div>

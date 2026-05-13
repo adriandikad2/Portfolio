@@ -84,6 +84,14 @@ export const skillCategories: SkillCategory[] = [
   },
 ];
 
+export interface GalleryItem {
+  id: string;
+  image?: string;
+  color?: string;
+  title?: string;
+  description: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -93,6 +101,7 @@ export interface Project {
   links: { label: string; href: string }[];
   image?: string;
   featured?: boolean;
+  gallery?: GalleryItem[];
 }
 
 export const projects: Project[] = [
@@ -107,6 +116,20 @@ export const projects: Project[] = [
       { label: "Play on Roblox", href: "#" },
     ],
     featured: true,
+    gallery: [
+      {
+        id: "clutter-1",
+        title: "Main Menu",
+        description: "The main menu interface built entirely with Luau and Roact. Features a clean, game-engine aesthetic with smooth transitions.",
+        color: "from-primary/20 to-secondary/20"
+      },
+      {
+        id: "clutter-2",
+        title: "Gameplay Loop",
+        description: "In-game screenshot showing the core session-based mechanics. Custom physics controllers handle object manipulation.",
+        color: "from-accent/20 to-secondary/20"
+      }
+    ]
   },
   {
     id: "die-io",
@@ -119,6 +142,20 @@ export const projects: Project[] = [
       { label: "View Source", href: "#" },
     ],
     featured: true,
+    gallery: [
+      {
+        id: "dieio-1",
+        title: "Main Menu",
+        description: "The main menu interface of die.io built with libGDX.",
+        color: "from-primary/20 to-secondary/20"
+      },
+      {
+        id: "dieio-2",
+        title: "Gameplay",
+        description: "2D rendering pipeline showcasing entities and collision.",
+        color: "from-accent/20 to-secondary/20"
+      }
+    ]
   },
   {
     id: "ugcleaks-drawbattle",
@@ -132,6 +169,20 @@ export const projects: Project[] = [
       { label: "Visit Drawbattle", href: "#" },
     ],
     featured: true,
+    gallery: [
+      {
+        id: "fullstack-1",
+        title: "UGCLeaks Dashboard",
+        description: "The dashboard interface of UGCLeaks built with Next.js and Tailwind.",
+        color: "from-primary/20 to-secondary/20"
+      },
+      {
+        id: "fullstack-2",
+        title: "Drawbattle Lobby",
+        description: "The multiplayer lobby for Drawbattle handling real-time socket connections.",
+        color: "from-chart-2/20 to-secondary/20"
+      }
+    ]
   },
   {
     id: "the-visuals",
@@ -141,8 +192,22 @@ export const projects: Project[] = [
       "A curated showcase of creative work spanning 3D Blender models, interior environment designs in Roblox Studio and The Sims 4, and digital graphic design projects including the Memory Album series.",
     tags: ["Blender", "Roblox Studio", "Sims 4", "Graphic Design"],
     links: [
-      { label: "View Gallery", href: "#visuals" },
+      { label: "View Gallery Section", href: "#visuals" },
     ],
+    gallery: [
+      {
+        id: "visuals-1",
+        title: "3D Environments",
+        description: "A comprehensive look at complex 3D environments built in Blender.",
+        color: "from-chart-3/20 to-secondary/20"
+      },
+      {
+        id: "visuals-2",
+        title: "Interior Renders",
+        description: "High fidelity interior renders showcasing lighting and textures.",
+        color: "from-chart-4/20 to-secondary/20"
+      }
+    ]
   },
 ];
 

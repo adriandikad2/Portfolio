@@ -7,31 +7,31 @@ import { skillCategories } from "@/data/portfolio-data";
 
 const colorMap = {
   cyan: {
-    border: "border-[#00d4ff]/20",
-    hoverBorder: "hover:border-[#00d4ff]/40",
-    bg: "bg-[#00d4ff]/5",
-    hoverBg: "hover:bg-[#00d4ff]/10",
-    text: "text-[#00d4ff]",
+    border: "border-primary/20",
+    hoverBorder: "hover:border-primary/40",
+    bg: "bg-primary/5",
+    hoverBg: "hover:bg-primary/10",
+    text: "text-primary",
     glow: "rgba(0, 212, 255, 0.15)",
-    tag: "bg-[#00d4ff]/10 text-[#00d4ff] border-[#00d4ff]/20",
+    tag: "bg-primary/10 text-primary border-primary/20",
   },
   violet: {
-    border: "border-[#a855f7]/20",
-    hoverBorder: "hover:border-[#a855f7]/40",
-    bg: "bg-[#a855f7]/5",
-    hoverBg: "hover:bg-[#a855f7]/10",
-    text: "text-[#a855f7]",
+    border: "border-accent/20",
+    hoverBorder: "hover:border-accent/40",
+    bg: "bg-accent/5",
+    hoverBg: "hover:bg-accent/10",
+    text: "text-accent",
     glow: "rgba(168, 85, 247, 0.15)",
-    tag: "bg-[#a855f7]/10 text-[#a855f7] border-[#a855f7]/20",
+    tag: "bg-accent/10 text-accent border-accent/20",
   },
   indigo: {
     border: "border-[#818cf8]/20",
     hoverBorder: "hover:border-[#818cf8]/40",
-    bg: "bg-[#818cf8]/5",
-    hoverBg: "hover:bg-[#818cf8]/10",
-    text: "text-[#818cf8]",
+    bg: "bg-chart-4/5",
+    hoverBg: "hover:bg-chart-4/10",
+    text: "text-chart-4",
     glow: "rgba(129, 140, 248, 0.15)",
-    tag: "bg-[#818cf8]/10 text-[#818cf8] border-[#818cf8]/20",
+    tag: "bg-chart-4/10 text-chart-4 border-[#818cf8]/20",
   },
   emerald: {
     border: "border-[#34d399]/20",
@@ -65,10 +65,10 @@ export function SkillsGrid() {
           {/* Lamp effect decoration */}
           <div className="relative mb-6 flex items-center justify-center">
             <div className="absolute h-[1px] w-48 bg-gradient-to-r from-transparent via-[#00d4ff]/40 to-transparent" />
-            <div className="absolute h-16 w-48 rounded-full bg-[#00d4ff]/5 blur-2xl" />
+            <div className="absolute h-16 w-48 rounded-full bg-primary/5 blur-2xl" />
           </div>
 
-          <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.25em] text-[#00d4ff]">
+          <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.25em] text-primary">
             // skills
           </span>
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
@@ -76,7 +76,7 @@ export function SkillsGrid() {
               Technical Arsenal
             </span>
           </h2>
-          <p className="mt-4 text-[#71717a] max-w-lg mx-auto">
+          <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
             The tools and technologies I wield to bring ideas to life — from game engines to full-stack systems.
           </p>
         </motion.div>
@@ -135,7 +135,7 @@ function SkillCard({
         "group relative rounded-xl border p-6 transition-all duration-500 overflow-hidden cursor-default",
         colors.border,
         colors.hoverBorder,
-        "bg-[#12121a]/50 hover:bg-[#12121a]/80",
+        "bg-card/50 hover:bg-card/80",
         spanClass
       )}
     >
@@ -163,10 +163,10 @@ function SkillCard({
               <Icon className={cn("h-4.5 w-4.5", colors.text)} />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-[#e4e4e7]">
+              <h3 className="text-sm font-semibold text-foreground">
                 {category.title}
               </h3>
-              <p className="text-[10px] text-[#52525b] font-mono">
+              <p className="text-[10px] text-muted-foreground/70 font-mono">
                 {category.subtitle}
               </p>
             </div>

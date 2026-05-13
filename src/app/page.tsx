@@ -5,14 +5,17 @@ import { VisualsSection } from "@/components/visuals-section";
 import { ContactSection } from "@/components/contact-section";
 import { FloatingDock } from "@/components/floating-dock";
 import { ScrollProgress } from "@/components/scroll-progress";
-import { CustomCursor } from "@/components/custom-cursor";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   return (
     <>
-      <CustomCursor />
       <ScrollProgress />
       <FloatingDock />
+      
+      <div className="fixed right-6 top-6 z-50">
+        <ThemeToggle />
+      </div>
 
       <main className="relative">
         <HeroSection />

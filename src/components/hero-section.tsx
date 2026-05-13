@@ -34,13 +34,13 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#27272a] bg-[#12121a]/80 px-4 py-1.5 backdrop-blur-sm"
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-1.5 backdrop-blur-sm"
         >
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00d4ff] opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00d4ff]" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
-          <span className="text-xs font-mono text-[#71717a]">
+          <span className="text-xs font-mono text-muted-foreground">
             Computer Engineering @ Universitas Indonesia
           </span>
         </motion.div>
@@ -61,7 +61,7 @@ export function HeroSection() {
         <div className="mb-6">
           <TextGenerateEffect
             words="Game Developer & Engineer"
-            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#00d4ff] text-glow-cyan"
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary text-glow-cyan"
             delay={0.8}
             duration={0.6}
           />
@@ -72,11 +72,11 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.4 }}
-          className="mx-auto mb-10 max-w-2xl text-base sm:text-lg text-[#71717a] leading-relaxed"
+          className="mx-auto mb-10 max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed"
         >
           Bridging complex system architecture with immersive world-building.
           <br className="hidden sm:block" />
-          <span className="text-[#a1a1aa]">
+          <span className="text-muted-foreground">
             From Luau game logic to full-stack web platforms —
           </span>{" "}
           crafting interactive experiences that push boundaries.
@@ -111,7 +111,7 @@ export function HeroSection() {
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="flex flex-col items-center gap-2"
           >
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#52525b]">
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground/70">
               Scroll
             </span>
             <div className="h-8 w-[1px] bg-gradient-to-b from-[#52525b] to-transparent" />

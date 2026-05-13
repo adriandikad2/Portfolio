@@ -51,8 +51,8 @@ export function FloatingDock() {
       <div
         className={cn(
           "flex items-center gap-1 rounded-2xl px-3 py-2",
-          "border border-[#27272a]/60",
-          "bg-[#0a0a0f]/80 backdrop-blur-xl",
+          "border border-border/60",
+          "bg-background/80 backdrop-blur-xl",
           "shadow-[0_0_30px_rgba(0,0,0,0.5)]"
         )}
       >
@@ -91,8 +91,8 @@ function DockIcon({
         className={cn(
           "absolute -top-10 left-1/2 -translate-x-1/2",
           "whitespace-nowrap rounded-md px-2.5 py-1",
-          "bg-[#1a1a2e] border border-[#27272a]",
-          "text-xs font-medium text-[#e4e4e7]",
+          "bg-secondary border border-border",
+          "text-xs font-medium text-foreground",
           "shadow-lg pointer-events-none"
         )}
       >
@@ -104,8 +104,8 @@ function DockIcon({
         className={cn(
           "flex items-center justify-center",
           "h-11 w-11 rounded-xl",
-          "text-[#71717a] transition-colors duration-200",
-          "hover:text-[#00d4ff] hover:bg-[#00d4ff]/10"
+          "text-muted-foreground transition-colors duration-200",
+          "hover:text-primary hover:bg-primary/10"
         )}
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.9 }}

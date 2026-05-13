@@ -24,7 +24,7 @@ export function ShimmerButton({
       className={cn(
         "group relative z-10 inline-flex items-center justify-center gap-2",
         "rounded-lg px-8 py-3.5 text-sm font-semibold",
-        "bg-gradient-to-r from-[#00d4ff] to-[#818cf8]",
+        "bg-gradient-to-r from-primary to-chart-4",
         "text-[#0a0a0f] transition-all duration-300",
         "overflow-hidden",
         className
@@ -71,9 +71,9 @@ export function OutlineButton({
       className={cn(
         "group relative inline-flex items-center justify-center gap-2",
         "rounded-lg px-8 py-3.5 text-sm font-semibold",
-        "border border-[#27272a] bg-transparent",
-        "text-[#e4e4e7] transition-all duration-300",
-        "hover:border-[#00d4ff]/50 hover:text-[#00d4ff]",
+        "border border-border bg-transparent",
+        "text-foreground transition-all duration-300",
+        "hover:border-primary/50 hover:text-primary",
         "overflow-hidden cursor-pointer",
         className
       )}

@@ -1,59 +1,154 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Eye, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Eye } from "lucide-react";
+import { GalleryModal } from "@/components/ui/gallery-modal";
+import type { GalleryItem } from "@/data/portfolio-data";
 
-const visualItems = [
+interface VisualItem {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  color: string;
+  gallery: GalleryItem[];
+}
+
+const visualItems: VisualItem[] = [
   {
     id: "blender-1",
     title: "3D Character Model",
     category: "Blender",
     description: "High-poly character model with PBR textures",
-    color: "from-[#00d4ff]/20 to-[#818cf8]/20",
+    color: "from-primary/20 to-chart-4/20",
+    gallery: [
+      {
+        id: "b1-g1",
+        title: "Front Orthographic",
+        description: "Front view of the character model showing clean edge flow and topology optimized for animation.",
+        color: "from-primary/20 to-chart-4/20",
+      },
+      {
+        id: "b1-g2",
+        title: "Wireframe Overlay",
+        description: "Wireframe rendering demonstrating the polygon density and edge loop placement around joints.",
+        color: "from-chart-4/20 to-primary/20",
+      },
+      {
+        id: "b1-g3",
+        title: "PBR Textures",
+        description: "Close-up shot of the materials, highlighting the roughness and normal maps baked in Substance Painter.",
+        color: "from-accent/20 to-primary/20",
+      }
+    ]
   },
   {
     id: "roblox-env-1",
     title: "Game Environment",
     category: "Roblox Studio",
     description: "Detailed interior environment for CLUTTER",
-    color: "from-[#a855f7]/20 to-[#6366f1]/20",
+    color: "from-accent/20 to-chart-5/20",
+    gallery: [
+      {
+        id: "re1-g1",
+        title: "Main Lobby",
+        description: "The central hub area featuring custom lighting, volumetric fog, and optimized PBR assets.",
+        color: "from-accent/20 to-chart-5/20",
+      },
+      {
+        id: "re1-g2",
+        title: "Corridor Lighting",
+        description: "A showcase of the dynamic lighting setup and shadow mapping used throughout the hallways.",
+        color: "from-chart-5/20 to-accent/20",
+      }
+    ]
   },
   {
     id: "sims-1",
     title: "Interior Design — Modern Loft",
     category: "The Sims 4",
     description: "Contemporary loft with custom furniture placement",
-    color: "from-[#34d399]/20 to-[#00d4ff]/20",
+    color: "from-chart-3/20 to-primary/20",
+    gallery: [
+      {
+        id: "s1-g1",
+        title: "Living Area",
+        description: "An open-plan living space utilizing moveobjects for custom shelving and plant placements.",
+        color: "from-chart-3/20 to-primary/20",
+      },
+      {
+        id: "s1-g2",
+        title: "Kitchen Layout",
+        description: "Industrial style kitchen featuring exposed brick and overhead custom lighting.",
+        color: "from-primary/20 to-chart-3/20",
+      }
+    ]
   },
   {
     id: "graphic-1",
     title: "Memory Album Cover",
     category: "Graphic Design",
     description: "Digital album art with photo manipulation",
-    color: "from-[#f472b6]/20 to-[#a855f7]/20",
+    color: "from-chart-2/20 to-accent/20",
+    gallery: [
+      {
+        id: "g1-g1",
+        title: "Final Cover",
+        description: "The finalized album artwork featuring deep color grading and overlay textures.",
+        color: "from-chart-2/20 to-accent/20",
+      },
+      {
+        id: "g1-g2",
+        title: "Typography Variants",
+        description: "Alternative typography explorations for the album title and artist name.",
+        color: "from-accent/20 to-[#f472b6]/20",
+      }
+    ]
   },
   {
     id: "blender-2",
     title: "Environment Props",
     category: "Blender",
     description: "Low-poly game-ready props collection",
-    color: "from-[#818cf8]/20 to-[#00d4ff]/20",
+    color: "from-chart-4/20 to-primary/20",
+    gallery: [
+      {
+        id: "b2-g1",
+        title: "Prop Sheet",
+        description: "A collection of 15+ low-poly props sharing a single texture atlas for mobile optimization.",
+        color: "from-chart-4/20 to-primary/20",
+      }
+    ]
   },
   {
     id: "roblox-env-2",
     title: "Map Design — Arena",
     category: "Roblox Studio",
     description: "Competitive arena layout with dynamic lighting",
-    color: "from-[#6366f1]/20 to-[#a855f7]/20",
+    color: "from-chart-5/20 to-accent/20",
+    gallery: [
+      {
+        id: "re2-g1",
+        title: "Top-Down View",
+        description: "Level design overview showing the three-lane structure and choke points.",
+        color: "from-chart-5/20 to-accent/20",
+      },
+      {
+        id: "re2-g2",
+        title: "Spawn Area",
+        description: "The detailed spawn room featuring team-specific coloring and directional signage.",
+        color: "from-accent/20 to-chart-5/20",
+      }
+    ]
   },
 ];
 
 export function VisualsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedItem, setSelectedItem] = useState<VisualItem | null>(null);
 
   return (
     <section id="visuals" ref={sectionRef} className="relative py-32 px-6">
@@ -66,11 +161,11 @@ export function VisualsSection() {
           className="mb-16 text-center"
         >
           <div className="relative mb-6 flex items-center justify-center">
-            <div className="absolute h-[1px] w-48 bg-gradient-to-r from-transparent via-[#818cf8]/40 to-transparent" />
-            <div className="absolute h-16 w-48 rounded-full bg-[#818cf8]/5 blur-2xl" />
+            <div className="absolute h-[1px] w-48 bg-gradient-to-r from-transparent via-chart-4/40 to-transparent" />
+            <div className="absolute h-16 w-48 rounded-full bg-chart-4/5 blur-2xl" />
           </div>
 
-          <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.25em] text-[#818cf8]">
+          <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.25em] text-chart-4">
             // visuals
           </span>
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
@@ -78,7 +173,7 @@ export function VisualsSection() {
               The Visual Portfolio
             </span>
           </h2>
-          <p className="mt-4 text-[#71717a] max-w-lg mx-auto">
+          <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
             3D modeling, environment design, and digital media — the creative
             side of game development.
           </p>
@@ -92,23 +187,20 @@ export function VisualsSection() {
               item={item}
               index={idx}
               isInView={isInView}
-              onClick={() => setSelectedIndex(idx)}
+              onClick={() => setSelectedItem(item)}
             />
           ))}
         </div>
       </div>
 
-      {/* Lightbox overlay */}
-      <AnimatePresence>
-        {selectedIndex !== null && (
-          <Lightbox
-            items={visualItems}
-            currentIndex={selectedIndex}
-            onClose={() => setSelectedIndex(null)}
-            onNavigate={setSelectedIndex}
-          />
-        )}
-      </AnimatePresence>
+      {/* New Gallery Modal */}
+      <GalleryModal
+        isOpen={selectedItem !== null}
+        onClose={() => setSelectedItem(null)}
+        title={selectedItem?.title || ""}
+        subtitle={selectedItem?.category || ""}
+        items={selectedItem?.gallery || []}
+      />
     </section>
   );
 }
@@ -119,7 +211,7 @@ function VisualCard({
   isInView,
   onClick,
 }: {
-  item: (typeof visualItems)[number];
+  item: VisualItem;
   index: number;
   isInView: boolean;
   onClick: () => void;
@@ -135,10 +227,10 @@ function VisualCard({
       <div
         className={cn(
           "relative aspect-[4/3] overflow-hidden rounded-xl",
-          "border border-[#27272a]/60",
-          "bg-[#12121a]/60",
+          "border border-border/60",
+          "bg-card/60",
           "transition-all duration-500",
-          "hover:border-[#00d4ff]/30",
+          "hover:border-primary/30",
           "hover:shadow-[0_0_30px_rgba(0,212,255,0.05)]"
         )}
       >
@@ -162,23 +254,23 @@ function VisualCard({
 
         {/* Center label */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#52525b] group-hover:text-[#71717a] transition-colors">
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70 group-hover:text-muted-foreground transition-colors">
             {item.category}
           </span>
         </div>
 
         {/* Hover overlay */}
-        <div className="absolute inset-0 flex items-end bg-gradient-to-t from-[#0a0a0f]/90 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="absolute inset-0 flex items-end bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <div className="w-full p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-[#e4e4e7]">
+                <p className="text-sm font-semibold text-foreground">
                   {item.title}
                 </p>
-                <p className="text-[11px] text-[#71717a]">{item.description}</p>
+                <p className="text-[11px] text-muted-foreground">{item.description}</p>
               </div>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#00d4ff]/20">
-                <Eye className="h-3.5 w-3.5 text-[#00d4ff]" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20">
+                <Eye className="h-3.5 w-3.5 text-primary" />
               </div>
             </div>
           </div>
@@ -186,99 +278,11 @@ function VisualCard({
 
         {/* Category badge */}
         <div className="absolute left-3 top-3">
-          <span className="rounded-md border border-[#27272a]/60 bg-[#0a0a0f]/60 px-2 py-0.5 text-[10px] font-mono text-[#71717a] backdrop-blur-sm">
+          <span className="rounded-md border border-border/60 bg-background/60 px-2 py-0.5 text-[10px] font-mono text-muted-foreground backdrop-blur-sm">
             {item.category}
           </span>
         </div>
       </div>
-    </motion.div>
-  );
-}
-
-function Lightbox({
-  items,
-  currentIndex,
-  onClose,
-  onNavigate,
-}: {
-  items: typeof visualItems;
-  currentIndex: number;
-  onClose: () => void;
-  onNavigate: (index: number) => void;
-}) {
-  const item = items[currentIndex];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-[#0a0a0f]/90 backdrop-blur-md p-6"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        transition={{ type: "spring", damping: 25 }}
-        className="relative max-w-4xl w-full"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute -top-12 right-0 rounded-full border border-[#27272a] bg-[#12121a] p-2 text-[#71717a] hover:text-[#e4e4e7] transition-colors"
-        >
-          <X className="h-5 w-5" />
-        </button>
-
-        {/* Image area */}
-        <div
-          className={cn(
-            "aspect-video rounded-xl border border-[#27272a]/60",
-            "bg-gradient-to-br",
-            item.color,
-            "bg-[#12121a]/80 flex items-center justify-center"
-          )}
-        >
-          <div className="text-center">
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#52525b]">
-              {item.category}
-            </span>
-            <h3 className="mt-2 text-xl font-bold text-[#e4e4e7]">
-              {item.title}
-            </h3>
-            <p className="mt-1 text-sm text-[#71717a]">{item.description}</p>
-          </div>
-        </div>
-
-        {/* Navigation */}
-        <div className="mt-4 flex items-center justify-between">
-          <button
-            onClick={() =>
-              onNavigate(
-                (currentIndex - 1 + items.length) % items.length
-              )
-            }
-            className="flex items-center gap-2 rounded-lg border border-[#27272a] bg-[#12121a] px-4 py-2 text-sm text-[#71717a] hover:text-[#00d4ff] hover:border-[#00d4ff]/40 transition-all"
-          >
-            <ChevronLeft className="h-4 w-4" />
-            Previous
-          </button>
-          <span className="font-mono text-xs text-[#52525b]">
-            {currentIndex + 1} / {items.length}
-          </span>
-          <button
-            onClick={() =>
-              onNavigate((currentIndex + 1) % items.length)
-            }
-            className="flex items-center gap-2 rounded-lg border border-[#27272a] bg-[#12121a] px-4 py-2 text-sm text-[#71717a] hover:text-[#00d4ff] hover:border-[#00d4ff]/40 transition-all"
-          >
-            Next
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </div>
-      </motion.div>
     </motion.div>
   );
 }
