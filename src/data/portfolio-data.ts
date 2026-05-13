@@ -5,7 +5,7 @@ export const siteConfig = {
   name: "Adrian Dika",
   title: "Adrian Dika's Portfolio",
   description:
-    "Portfolio of Adrian Dika, a Computer Engineering student at Universitas Indonesia specializing in game development, full-stack architecture, and 3D world building.",
+    "Portfolio of Adrian Dika, a Computer Engineering student at Universitas Indonesia specializing in game development, full-stack architecture, 2D Graphics, and 3D world building.",
   url: "https://adrian.vercel.app",
 } as const;
 
@@ -84,49 +84,118 @@ export const skillCategories: SkillCategory[] = [
   },
 ];
 
-export function getSkillColor(tagName: string): "cyan" | "violet" | "indigo" | "emerald" | "default" {
-  const normalizedTag = tagName.toLowerCase();
-  
-  // Direct matches or common aliases mapped to the requested colors:
-  // - Roblox Studio, Unity, LibGDX = game engine (cyan/indigo) -> Wait, user said game engine.
-  // "Game engine" -> cyan (Core Game Coding) or indigo?
-  // Let's use the explicit mapping from the prompt:
-  // Roblox Studio, Unity, LibGDX = game engine (let's say cyan)
-  // Luau, Java, etc. = language (cyan)
-  // Blender, The Sims 4 = 3D Art (indigo)
-  // YouTube, Figma, UI/UX = Creative (emerald)
+export type SkillColor = 
+  | "cyan" | "violet" | "indigo" | "emerald" | "amber" 
+  | "rose" | "sky" | "fuchsia" | "orange" | "slate" 
+  | "teal" | "blue" | "default";
 
-  const colorMap: Record<string, "cyan" | "violet" | "indigo" | "emerald"> = {
-    "roblox studio": "cyan",
-    "unity": "cyan",
-    "libgdx": "cyan",
-    "game engine": "cyan",
-    "luau": "cyan",
-    "java": "cyan",
-    "rojo": "cyan",
-    "game logic": "cyan",
+export function getSkillColor(tagName: string): SkillColor {
+  const normalizedTag = tagName.toLowerCase();
+
+  const colorMap: Record<string, SkillColor> = {
+    // 💻 Programming Languages (amber)
+    "c": "amber",
+    "c++": "amber",
+    "c#": "amber",
+    "java": "amber",
+    "javascript": "amber",
+    "typescript": "amber",
+    "python": "amber",
+    "go": "amber",
+    "lua": "amber",
+    "luau": "amber",
+    "html5": "amber",
+    "css3": "amber",
+    "vhdl": "amber",
+    "assembly": "amber",
+    ".s": "amber",
+    ".ino": "amber",
+    "json": "amber",
+    
+    // 🧠 AI & Assistant Tools (fuchsia)
+    "chatgpt": "fuchsia",
+    "claude": "fuchsia",
+    "qwen": "fuchsia",
+    "github copilot": "fuchsia",
+    "v0": "fuchsia",
+    "gemini": "fuchsia",
+    "ai": "fuchsia",
+    
+    // 🧪 Data Science & Analysis (orange)
+    "jupyter": "orange",
+    ".ipynb": "orange",
+    "google colab": "orange",
+    "matplotlib": "orange",
+    "pandas": "orange",
+    "scikit-learn": "orange",
+    
+    // 🧰 Dev Tools & Platforms (slate)
+    "docker": "slate",
+    "vscode": "slate",
+    "intellij idea": "slate",
+    "bluej": "slate",
+    "github": "slate",
+    
+    // 🛢️ Backend & Databases (rose)
+    "mongodb": "rose",
+    "postgresql": "rose",
+    "neon": "rose",
+    "neon db": "rose",
+    "database": "rose",
+    
+    // 🎨 Design Tools (emerald)
+    "figma": "emerald",
+    "canva": "emerald",
+    "photoshop": "emerald",
+    "illustrator": "emerald",
+    "gimp": "emerald",
+    "draw.io": "emerald",
+    "ui/ux": "emerald",
+    "ui/ux design": "emerald",
+    "graphic design": "emerald",
+    "creative": "emerald",
+    "digital graphic design": "emerald",
+    "2d rendering": "emerald",
+    
+    // ⚒️ Simulation Engines (teal)
+    "unity": "teal",
+    
+    // 🌐 Frontend & Web Dev Stack (sky)
+    "react": "sky",
+    "react router": "sky",
+    "vite": "sky",
+    "html": "sky",
+    "css": "sky",
+    
+    // ⚡ Fullstack & Systems (violet)
     "next.js": "violet",
-    "vercel": "violet",
-    "neon db": "violet",
-    "postgresql": "violet",
     "serverless": "violet",
     "api bridge": "violet",
     "real-time": "violet",
     "multiplayer": "violet",
+    
+    // ☁️ Cloud & Infra (blue)
+    "alibaba cloud": "blue",
+    "vercel": "blue",
+    
+    // 🎮 Gaming / Game / Platform (cyan)
+    "roblox studio": "cyan",
+    "libgdx": "cyan",
+    "game engine": "cyan",
+    "rojo": "cyan",
+    "game logic": "cyan",
+    
+    // 🧊 3D Modelling (indigo)
     "blender": "indigo",
     "the sims 4": "indigo",
     "sims 4": "indigo",
     "3d art": "indigo",
     "asset integration": "indigo",
+    
+    // Other specific tags
     "youtube": "emerald",
-    "figma": "emerald",
-    "ui/ux": "emerald",
-    "ui/ux design": "emerald",
-    "graphic design": "emerald",
-    "creative": "emerald",
-    "2d rendering": "emerald",
-    "vibe coding": "emerald",
-    "antigravity": "emerald",
+    "vibe coding": "fuchsia",
+    "antigravity": "fuchsia",
   };
 
   if (colorMap[normalizedTag]) {
@@ -137,7 +206,7 @@ export function getSkillColor(tagName: string): "cyan" | "violet" | "indigo" | "
   for (const category of skillCategories) {
     for (const skill of category.skills) {
       if (skill.name.toLowerCase().includes(normalizedTag) || normalizedTag.includes(skill.name.toLowerCase())) {
-        return category.color;
+        return category.color as SkillColor;
       }
     }
   }
@@ -170,7 +239,7 @@ export const projects: Project[] = [
   {
     id: "clutter",
     title: "CLUTTER",
-    subtitle: "Roblox Game",
+    subtitle: "Most Ambitious Roblox Project",
     description:
       "A fully-realized Roblox experience built from the ground up with Luau scripting. Features complex game logic systems, custom physics interactions, and tightly integrated 3D assets — all designed for engaging, session-based gameplay.",
     tags: ["Luau", "Roblox Studio", "Rojo", "Game Logic", "Vibe Coding", "Antigravity", "Blender", "Asset Integration"],
@@ -220,7 +289,7 @@ export const projects: Project[] = [
       },
       {
         id: "clutter-6",
-        title: "CLUTTER Moodboard",
+        title: "Moodboard",
         image: "/projects/ClutterMoodboard.webp",
         imageLabel: "Conceptualization of the game's ideas and visuals.",
         description: "ID 🇮🇩: Kita (saya dan rekan-rekan saya dalam proyek ini) merancang ide-ide yang tidak berkaitan langsung dengan kode pada Figma yang menjadi tempat mencetuskan konsep-konsep visual ataupun membahas alur game. EN 🇬🇧: We (my colleagues and I in this project) brainstormed ideas unrelated to the actual coding part of the game  on Figma, which served as our canvas for visualizing concepts and discussing game flow.",
@@ -228,7 +297,7 @@ export const projects: Project[] = [
       },
       {
         id: "clutter-7",
-        title: "CLUTTER Workspace",
+        title: "Workspace",
         image: "/projects/ClutterWorkspace.webp",
         imageLabel: "A sneak peek inside the workspace.",
         description: "ID 🇮🇩: Jelas, saya meminta AI ini dan itu untuk merealisasikan segala ide saya serta implementasi khusus yang saya rasa diperlukan agar saya bisa memangkas waktu untuk lebih melimpahkan sumber daya untuk fokus pada apa yang memang dibutuhkan game ini. Sedikit yang saya lakukan pada kode secara langsung dan lebih banyak menginvestigasi hasil kerjaan AI. EN 🇬🇧: Nevertheless, I still learn how the codes work from what AI has generated and understand the core mechanisms of each functionality and how they behave with one another. The whole integration is done using Rojo, an extension used to bridge connections between Antigravity and Roblox Studio and further synchronizes changes made in Antigravity to then be applied into Roblox Studio. The whole setup is simple.",
@@ -236,7 +305,7 @@ export const projects: Project[] = [
       },
       {
         id: "clutter-8",
-        title: "CLUTTER Assets Tracker",
+        title: "Assets Tracker",
         image: "/projects/ClutterAssetProgress.webp",
         imageLabel: "Tracker in Figma for the assets made so far. Assets are done in Blender.",
         description: "ID 🇮🇩: Aset yang telah saya buat sendiri wajib saya reka agar mudah keeping track of sehingga tidak perlu adanya kesalahan dalam pengecekan aset yang belum dan sudah dibuat. Sekte merah menandakan daftar aset yang masih berupa ide dan belum direalisasikan dan sekte hijau menandakan daftar nama aset yang telah dibuat. EN 🇬🇧: Whenever I create assets, the first thing I'd do is to create a tracker to keep track of the assets that have been made and the ones that are planned to be created. The red section on the left of each group consists of the lists of the assets that are ideated to be made in Blender while the green section keeps track of all the assets that have been made in the Blender file. Sometimes objects are still not fixated to a certain category, which means that it can still be moved around to other categories. Categorizing is apparently a knowledge that I also need to master to create the planning of universally dividing all the assets into their proportionate categories.",
@@ -244,7 +313,7 @@ export const projects: Project[] = [
       },
       {
         id: "clutter-9",
-        title: "CLUTTER Assets in Demo",
+        title: "Assets in Demo",
         image: "/projects/ClutterOwnAssets.webp",
         imageLabel: "Screenshot of a demo using assets I've made. So happy this turned out really lively with so many colors!",
         description: "ID 🇮🇩: Demo tersebut menggunakan aset yang diekspor dari Blender ke Roblox Studio. Banyak aspek dari kode yang telah dipermulus semenjak Februari tahun 2026. EN 🇬🇧: I've exported the assets from Blender into Roblox Studio to test the playability and performance of the game. Assets are low-poly which means that they will not consume players' memory and also saves the GPU from unloading texture assets multiple of times by only utilizing one texture file for all the assets. The amount of memory saved is around 334MB. I lied, Antigravity's own editor autocompleted that amount of memory saved. lol. But the assets are actually optimized for performance by keeping the tris count low in order to make itランニング smoothly on most devices. Antigravity also autocompleted that \"make itランニング smoothly on most devices.\", but point being, assets were tested for performance during this demo. Many of the implementations from the previous demo, such as the behaviour of a black hole, were removed because I felt like they made the gameplay lack of any soul. For now, I'll still be sticking to the original roots of a Katamari where the objects stick to the ball. Further explanation of these assets are available on the \"Visual Portfolio\" down below these cards.",
@@ -255,7 +324,7 @@ export const projects: Project[] = [
   {
     id: "die-io",
     title: "Die.io",
-    subtitle: "libGDX Offline Desktop Game",
+    subtitle: "libGDX's Homage to Diep.io",
     description:
       "A Java-based 2D game built on the libGDX framework. Implements core engine mechanics including custom rendering pipelines, entity-component systems, and real-time collision detection — all running at 60fps.",
     tags: ["Java", "libGDX", "2D Rendering"],
@@ -268,9 +337,9 @@ export const projects: Project[] = [
     gallery: [
       {
         id: "dieio-1",
-        title: "Die.io Logo",
+        title: "Logo",
         image: "/projects/DieioLogo.webp", 
-        imageLabel: "The official logo of Die.io.",
+        imageLabel: "Logo is actually taken from in-game gameplay. Not subject to change.",
         description: "ID 🇮🇩: Die.io adalah game yang menggunakan engine libGDX dengan mengambil inspirasi dari game website populer Diep.io. Game ini dirancang oleh tim saya yang beranggotakan empat (4) orang di mana saya menjabat posisi sebagai Lead Developer. Saya berperan mengembangkan keseluruhan arsitektur game, ide, dan konsep, penggunaan object pooling untuk mengkategorisasikan Enemy dan Shapes untuk optimisasi performa perangkat, dan mengintegrasikan komponen lain yang dikembangkan anggota tim lainnya. Saya juga mengembangkan sebuah backend untuk mengimplementasikan leaderboards pada game tersebut. Game ini merupakan proyek yang menggunakan engine yang tergolong usang untuk menumbuhkan pemahaman saya dalam mengoptimasi performa perangkat keras dan juga mekanik game yang kompleks. EN 🇬🇧: Die.io is a libGDX-oriented game that is designed by my team of four. This game was my first libGDX project and was developed as a comprehension towards the concept of Object-Oriented Programming as a whole. I took the role of the lead developer in the team where I implemented object pooling to categorize the enemies and the shapes to optimize hardware performance and integrated components developed by other members of the team. I also added a backend system to implement leaderboards for the game where the scores are displayed locally. You can check out the game in the linked Itch.io page! The game is also open source in GitHub.",
         color: "from-primary/20 to-secondary/20"
       }
@@ -291,7 +360,7 @@ export const projects: Project[] = [
     gallery: [
       {
         id: "ugcleaks-1",
-        title: "UGCLeaks",
+        title: "Landing Page",
         image: "/projects/UGCLeaksLanding.webp",
         imageLabel: "Landing page of the official website. Silly and aesthetically pleasing.",
         description: "ID 🇮🇩: UGCLeaks adalah website sebagai central hub informasi jadwal rilis dan informasi mengenai UGC (User-Generated Content) di platform Roblox. UGC sendiri adalah produk aksesoris virtual yang dibuat oleh komunitas Roblox dan dijual di platform tersebut melalui API Marketplace. Website ini menawarkan informasi Free UGC / UGC Gratis yang dapat dilihat oleh pengguna secara masif mengenai informasi UGC yang bisa didapatkan secara gratis dengan stok tertentu untuk setiap UGC. Website ini dikelola oleh beberapa orang terpercaya yang saya tunjuk secara pribadi untuk mengelola jadwal-jadwal beserta informasi mengenai Free UGC / UGC Gratis yang akan/sudah rilis. Proyek ini merupakan passion saya di penghujung 2025 karena saya melihat seseorang yang mencoba untuk membuat situs serupa di Vercel, tetapi karena mereka masih pemula, saya menawarkan diri saya sendiri untuk mengembangkan website ini dengan tujuan memudahkan informasi mengenai Free UGC / UGC Gratis kepada pengguna dalam skala besar. Safe to say bahwa saya sangat tekun dan berdedikasi dalam menuntaskan hal ini karena proyek ini merupakan website pertama saya yang sukses. Proyek ini mampu mengajari saya banyak hal yang mencakup implementasi frontend, serverless deployment, integrasi API resmi dari dokumentasi Roblox, dan keamanan siber serta tindakan preventatif terhadap ancaman website. EN 🇬🇧: UGCLeaks is a web application that provides the purpose of being the central hub of informations circulating around Free UGC. What's a \"Free UGC\", you ask? First things first, UGC, or User Generated Content, is a virtual accessory created by Roblox\'s community of 3d artists/designers that are published onto the Marketplace API of Roblox. These accessories can be sold for Robux, Roblox\'s official currency. Now UGC can be sold as a limited quantity stock, which are posed as \"Free UGC\". Free UGC has been a thing since early 2023 and is still around up until now. Free UGCs are usually distributed by brands or known \"Free UGC\" creators where they would be giving away these limited accessories to the general public for a certain amount of time or until the stock runs out. Informations regarding the release of a Free UGC is scarce and often spread everywhere, which is why this website was developed in the first place. Users can view and determine which items they can go for with schedules provided by personally handpicked trustworthy managers of this website. This website was my kickstarter towards full-stack applications because back in 2025 towards the end of the year, I saw someone making the same thing as a beginner, and that's where I stepped in to offer my hand and assist that person in creating the same website more polished feature and visuals. Ever since that moment, I've found one of my passions in the technology world, which is full-stack applications as a whole. This project taught me a lot of things from frontend implementations and theme-aware components, API integrations from Roblox's documentations, serverless Vercel deployment, and cybersecurity and website threat mitigations.",
@@ -299,7 +368,7 @@ export const projects: Project[] = [
       },
       {
         id: "ugcleaks-2",
-        title: "UGCLeaks Upcoming Page",
+        title: "Upcoming Page",
         image: "/projects/UGCLeaksUpcoming.webp",
         imageLabel: "The standard page where all the main actions happen. The epitome of my UI/UX skill, if I say so myself.",
         description: "ID 🇮🇩: Laman inilah yang digunakan semua orang. Semua informasi mengenai jadwal UGC Gratis yang akan rilis terletak di laman ini, mulai dari tanggal rilis yang disesuaikan dengan zona waktu masing-masing pengguna situs, link menuju game yang menyediakan UGC Gratis tersebut, dan jumlah stok yang diketahui. Ada beberapa kategori yang membedakan jadwal-jadwal tersebut, dan yang ditampilkan sekarang adalah kategori \"Upcoming\" di mana UGC yang diketahui sejauh ini ditampilkan sebelum mereka rilis. EN 🇬🇧: The main stagelight, the most functional and frequently used page on the website. The place where all the actions go down. This page displays all the Free UGCs that are scheduled to be released, adjusted with the user's local timezone, the game link the UGC is released in, and the stock count of the UGC. We are currently viewing the \"Upcoming\" category where known UGCs are being displayed with their intended release date and known informations.",
@@ -307,7 +376,7 @@ export const projects: Project[] = [
       },
       {
         id: "ugcleaks-3",
-        title: "UGCLeaks Scheduler Page",
+        title: "Scheduler Page",
         image: "/projects/UGCLeaksScheduler.webp",
         imageLabel: "This page is exclusive to me and a select few, sorry! But it's the command center for the website, you know?",
         description: "ID 🇮🇩: Tak banyak yang bisa melihat ini sebenarnya, tapi inilah laman yang digunakan untuk membuat jadwal-jadwal tersebut. Tiap kolom dilengkapi dengan teks pemandu agar orang-orang yang saya tunjuk sebagai pengelola tahu apa yang harus diisi pada tiap kolom. EN 🇬🇧: Some people are very lucky to even see this page because this is isolated off from normal users. This page serves its purpose to be the main interface for appointed admins of UGCLeaks to create schedules for upcoming Free UGCs. Each column comes with tooltips and instructions so that the admins know what to fill in each column. Pretty self-explanatory, right? I know, I know.",
@@ -358,23 +427,33 @@ export const projects: Project[] = [
   {
     id: "drawbattle",
     title: "Drawbattle",
-    subtitle: "Real-Time Multiplayer Game",
+    subtitle: "Gartic Phone's Unofficial Sequel",
     description:
       "A production-grade web application delivering real-time multiplayer drawing experiences. Features real-time state synchronization and low-latency interactions built for performance at scale.",
-    tags: ["Next.js", "Vercel", "Real-time", "Multiplayer", "Serverless"],
+    tags: ["Next.js", "Vercel", "V0", "Neon DB", "PostgreSQL", "Real-time", "Multiplayer", "UI/UX"],
     links: [
-      { label: "Visit Drawbattle", href: "#" },
+      { label: "View Source", href: "https://github.com/adriandikad2/DrawBattle" }, 
+      { label: "Visit Drawbattle (Website is discontinued)", href: "https://drawbattle.vercel.app/" },
     ],
-    image: "", // Main card image
+    image: "/projects/DrawbattleLanding.webp",
     featured: true,
     gallery: [
       {
-        id: "fullstack-2",
-        title: "Drawbattle Lobby",
-        image: "", // Gallery image
-        description: "The multiplayer lobby for Drawbattle handling real-time socket connections.",
+        id: "drawbattle-1",
+        title: "Landing Page",
+        image: "/projects/DrawbattleLanding.webp",
+        imageLabel: "Epitome frontend implementation. Thank my colleague.",
+        description: "ID 🇮🇩: Website ini dikembangkan dari fondasi ide saya untuk sebuah proyek kelompok. Keseluruhan codingan pada website ini dikerjakan paruhan antara saya dan satu teman saya lagi. Saya lebih banyak melakukan implementasi endpoint dan logic-logic untuk keseluruhan alur game serta fungsionalitas kanvas bagi para pengguna untuk menggambar beserta alat-alat menggambarnya, sedangkan teman saya lebih banyak melakukan styling website dan deployment backend. EN 🇬🇧: This website was developed from my initial idea for a group project. The entire codebase for this website was a collaborative effort between myself and another friend. I was primarily responsible for implementing endpoints and the core game logic for the entire gameplay flow, including the drawing canvas functionality and its associated drawing tools, while my friend focused more on the website's styling and backend deployment.",
         color: "from-chart-2/20 to-secondary/20"
-      }
+      },
+      {
+        id: "drawbattle-2",
+        title: "Drawings Page",
+        image: "/projects/DrawbattleDrawings.webp",
+        imageLabel: "Drawings stored for each account.",
+        description: "ID 🇮🇩: Laman ini menampilkan hasil gambar pengguna untuk tiap ronde yang telah dilalui. Terdapat opsi untuk mereka simpan ke perangkat atau bisa mereka hapus secara permanen dari database. Screenshot agak buram karena ini arsip lama. EN 🇬🇧: This page displays users' drawings from each round they have played. Users can preview them and save whichever image they want into their devices or straight up delete them off the face of internet. Screenshot is tad bit blurry 'cause this was captured inside of a Discord screenshare.",
+        color: "from-chart-2/20 to-secondary/20"
+      },
     ]
   },
   {

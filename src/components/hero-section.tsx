@@ -77,7 +77,7 @@ export function HeroSection() {
           A little bit about my projects, passions, and powers.
           <br className="hidden sm:block" />
           <span className="text-muted-foreground">
-            Major interests in the whole process of game development, from planning, conceptualizations, draft sketches, codes, arts, asset creations, marketing & research, community building and managing, sound design, and more.
+            Major interests in the whole process of game development, from ideas, conceptualizations, draft sketches, codes, arts, asset creations, marketing & research, community building and managing, sound design, and confident singing in-between projects. Also fullstack applications (with AI integration these days).
           </span>
         </motion.p>
 
