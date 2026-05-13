@@ -109,6 +109,15 @@ export function GalleryModal({
                   currentItem.color || "from-secondary to-background"
                 )}
               >
+                {/* Preload next/prev images to prevent delay when rapidly clicking */}
+                <div className="hidden">
+                  {items.length > 1 && (
+                    <>
+                      <img src={items[(safeIndex + 1) % items.length]?.image} alt="" />
+                      <img src={items[(safeIndex - 1 + items.length) % items.length]?.image} alt="" />
+                    </>
+                  )}
+                </div>
                 {/* Grid pattern placeholder */}
                 <div
                   className="absolute inset-0 opacity-[0.04]"
@@ -118,31 +127,52 @@ export function GalleryModal({
                     backgroundSize: "24px 24px",
                   }}
                 />
-                
-                {currentItem.image ? (
-                  <img
-                    src={currentItem.image}
-                    alt={currentItem.title || "Gallery image"}
-                    className="absolute inset-0 h-full w-full object-contain z-10"
-                  />
-                ) : (
-                  <div className="text-center relative z-10">
-                    <span className="font-mono text-sm uppercase tracking-[0.2em] text-muted-foreground/70">
-                      Image Placeholder
-                    </span>
-                  </div>
-                )}
+                <AnimatePresence mode="popLayout">
+                  {currentItem.image ? (
+                    <motion.img
+                      key={currentItem.image}
+                      src={currentItem.image}
+                      alt={currentItem.title || "Gallery image"}
+                      initial={{ opacity: 0, filter: "blur(4px)" }}
+                      animate={{ opacity: 1, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, filter: "blur(4px)" }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      className="absolute inset-0 h-full w-full object-contain z-10"
+                    />
+                  ) : (
+                    <motion.div 
+                      key="placeholder"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="text-center relative z-10 w-full"
+                    >
+                      <span className="font-mono text-sm uppercase tracking-[0.2em] text-muted-foreground/70">
+                        Image Placeholder
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* Image title overlay */}
-                {(currentItem.imageLabel || currentItem.title) && (
-                  <div className="absolute bottom-0 left-0 right-0 z-20">
-                    <div className="bg-gradient-to-t from-black/60 via-black/30 to-transparent px-5 pt-8 pb-4">
-                      <p className="text-sm font-medium text-white/90 drop-shadow-md line-clamp-1">
-                        {currentItem.imageLabel || currentItem.title}
-                      </p>
-                    </div>
-                  </div>
-                )}
+                <AnimatePresence mode="popLayout">
+                  {(currentItem.imageLabel || currentItem.title) && (
+                    <motion.div 
+                      key={currentItem.imageLabel || currentItem.title}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute bottom-0 left-0 right-0 z-20"
+                    >
+                      <div className="bg-gradient-to-t from-black/60 via-black/30 to-transparent px-5 pt-8 pb-4">
+                        <p className="text-sm font-medium text-white/90 drop-shadow-md line-clamp-1">
+                          {currentItem.imageLabel || currentItem.title}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Navigation Controls over image */}
@@ -189,28 +219,37 @@ export function GalleryModal({
                 </h2>
 
                 <div className="flex-1 overflow-y-auto pr-2 pb-8">
-                  <div className="space-y-4">
-                    {currentItem.title && (
-                      <h3 className="text-lg font-semibold text-foreground">
-                        {currentItem.title}
-                      </h3>
-                    )}
-                    <div className="text-muted-foreground leading-relaxed whitespace-pre-wrap text-sm">
-                      {currentItem.description.includes("EN 🇬🇧:") ? (
-                        <div className="space-y-4">
-                          <div className="relative pl-4 border-l-2 border-primary/30 py-1">
-                            <Linkify text={currentItem.description.split("EN 🇬🇧:")[0].replace("ID 🇮🇩:", "").trim()} />
-                          </div>
-                          <div className="h-px w-full bg-gradient-to-r from-border via-border/20 to-transparent my-4" />
-                          <div className="relative pl-4 border-l-2 border-accent/30 py-1 opacity-90">
-                            <Linkify text={currentItem.description.split("EN 🇬🇧:")[1].trim()} />
-                          </div>
-                        </div>
-                      ) : (
-                        <Linkify text={currentItem.description} />
+                  <AnimatePresence mode="popLayout">
+                    <motion.div 
+                      key={currentItem.id || safeIndex}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="space-y-4"
+                    >
+                      {currentItem.title && (
+                        <h3 className="text-lg font-semibold text-foreground">
+                          {currentItem.title}
+                        </h3>
                       )}
-                    </div>
-                  </div>
+                      <div className="text-muted-foreground leading-relaxed whitespace-pre-wrap text-sm">
+                        {currentItem.description.includes("EN 🇬🇧:") ? (
+                          <div className="space-y-4">
+                            <div className="relative pl-4 border-l-2 border-primary/30 py-1">
+                              <Linkify text={currentItem.description.split("EN 🇬🇧:")[0].replace("ID 🇮🇩:", "").trim()} />
+                            </div>
+                            <div className="h-px w-full bg-gradient-to-r from-border via-border/20 to-transparent my-4" />
+                            <div className="relative pl-4 border-l-2 border-accent/30 py-1 opacity-90">
+                              <Linkify text={currentItem.description.split("EN 🇬🇧:")[1].trim()} />
+                            </div>
+                          </div>
+                        ) : (
+                          <Linkify text={currentItem.description} />
+                        )}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
