@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Linkify } from "@/components/ui/linkify";
 
 export interface GalleryItem {
   id: string;
   image?: string;
+  imageLabel?: string;
   color?: string;
   title?: string;
   description: string;
@@ -15,7 +17,7 @@ export interface GalleryItem {
 
 interface GalleryModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose: (finalIndex: number) => void;
   title: string;
   subtitle: string;
   items: GalleryItem[];
@@ -42,10 +44,14 @@ export function GalleryModal({
     };
   }, [isOpen]);
 
+  const handleClose = () => {
+    onClose(currentIndex);
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") handleClose();
       if (e.key === "ArrowRight") setCurrentIndex((prev) => (prev + 1) % items.length);
       if (e.key === "ArrowLeft") setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
     };
@@ -75,7 +81,7 @@ export function GalleryModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 p-4 sm:p-6 backdrop-blur-md"
-          onClick={onClose}
+          onClick={handleClose}
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -87,7 +93,7 @@ export function GalleryModal({
           >
             {/* Close button - Absolute for mobile */}
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="absolute right-4 top-4 z-50 rounded-full border border-border bg-background/80 p-2 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground lg:hidden"
             >
               <X className="h-5 w-5" />
@@ -125,6 +131,17 @@ export function GalleryModal({
                     </span>
                   </div>
                 )}
+
+                {/* Image title overlay */}
+                {(currentItem.imageLabel || currentItem.title) && (
+                  <div className="absolute bottom-0 left-0 right-0 z-20">
+                    <div className="bg-gradient-to-t from-black/60 via-black/30 to-transparent px-5 pt-8 pb-4">
+                      <p className="text-sm font-medium text-white/90 drop-shadow-md line-clamp-1">
+                        {currentItem.imageLabel || currentItem.title}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Navigation Controls over image */}
@@ -155,7 +172,7 @@ export function GalleryModal({
             <div className="flex h-1/3 w-full flex-col border-t border-border bg-background p-6 sm:p-8 lg:h-full lg:w-[400px] lg:border-l lg:border-t-0 shrink-0">
               <div className="hidden items-center justify-end lg:flex">
                 <button
-                  onClick={onClose}
+                  onClick={handleClose}
                   className="rounded-full p-2 text-muted-foreground transition-colors hover:text-foreground hover:bg-[#27272a]"
                 >
                   <X className="h-5 w-5" />
@@ -178,7 +195,19 @@ export function GalleryModal({
                       </h3>
                     )}
                     <div className="text-muted-foreground leading-relaxed whitespace-pre-wrap text-sm">
-                      {currentItem.description}
+                      {currentItem.description.includes("EN 🇬🇧:") ? (
+                        <div className="space-y-4">
+                          <div className="relative pl-4 border-l-2 border-primary/30 py-1">
+                            <Linkify text={currentItem.description.split("EN 🇬🇧:")[0].replace("ID 🇮🇩:", "").trim()} />
+                          </div>
+                          <div className="h-px w-full bg-gradient-to-r from-border via-border/20 to-transparent my-4" />
+                          <div className="relative pl-4 border-l-2 border-accent/30 py-1 opacity-90">
+                            <Linkify text={currentItem.description.split("EN 🇬🇧:")[1].trim()} />
+                          </div>
+                        </div>
+                      ) : (
+                        <Linkify text={currentItem.description} />
+                      )}
                     </div>
                   </div>
                 </div>

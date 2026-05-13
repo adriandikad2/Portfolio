@@ -37,8 +37,6 @@ export const metadata: Metadata = {
   },
 };
 
-import { ThemeProvider } from "@/components/theme-provider";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,18 +45,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="min-h-screen bg-background text-foreground overflow-x-hidden">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+      <body className="min-h-screen bg-background text-foreground overflow-x-hidden select-none">
+        {children}
       </body>
     </html>
   );

@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/brand-icons";
+import { Linkify } from "@/components/ui/linkify";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/data/portfolio-data";
 
@@ -11,13 +12,33 @@ interface ProjectCardProps {
   project: Project;
   index: number;
   isInView: boolean;
+  currentIndex: number;
+  onIndexChange: (index: number) => void;
   onViewGallery?: () => void;
 }
 
-export function ProjectCard({ project, index, isInView, onViewGallery }: ProjectCardProps) {
+export function ProjectCard({ 
+  project, 
+  index, 
+  isInView, 
+  currentIndex,
+  onIndexChange,
+  onViewGallery 
+}: ProjectCardProps) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const gallery = project.gallery;
+    if (!gallery || gallery.length <= 1) return;
+    
+    const interval = setInterval(() => {
+      onIndexChange((currentIndex + 1) % gallery.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [currentIndex, project.gallery, onIndexChange]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return;
@@ -32,6 +53,7 @@ export function ProjectCard({ project, index, isInView, onViewGallery }: Project
   const rotateY = isHovered ? (mousePos.x - 0.5) * 8 : 0;
 
   const isReversed = index % 2 === 1;
+  const currentGalleryItem = project.gallery?.[currentIndex];
 
   return (
     <motion.div
@@ -80,11 +102,11 @@ export function ProjectCard({ project, index, isInView, onViewGallery }: Project
             isReversed && "lg:flex-row-reverse"
           )}
         >
-          {/* Image placeholder */}
-          <div className="relative shrink-0 overflow-hidden rounded-xl lg:w-[45%]">
+          {/* Image Area */}
+          <div className="relative shrink-0 overflow-hidden rounded-xl lg:w-[45%] aspect-video">
             <div
               className={cn(
-                "aspect-video w-full rounded-xl",
+                "h-full w-full rounded-xl relative",
                 "bg-gradient-to-br from-secondary via-[#12121a] to-background",
                 "border border-border/40",
                 "flex items-center justify-center",
@@ -92,24 +114,75 @@ export function ProjectCard({ project, index, isInView, onViewGallery }: Project
                 "group-hover:border-primary/20"
               )}
             >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.6 }}
+                  exit={{ opacity: 0 }}
+                  className={cn(
+                    "absolute inset-0 bg-gradient-to-br",
+                    currentGalleryItem?.color || "from-secondary to-background"
+                  )}
+                />
+              </AnimatePresence>
+
+              {currentGalleryItem?.image && (
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentGalleryItem.image}
+                    src={currentGalleryItem.image}
+                    alt={project.title}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute inset-0 h-full w-full object-cover z-10"
+                  />
+                </AnimatePresence>
+              )}
+
               {/* Grid pattern inside placeholder */}
               <div
-                className="absolute inset-0 opacity-[0.04]"
+                className="absolute inset-0 opacity-[0.04] z-20"
                 style={{
                   backgroundImage:
                     "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
                   backgroundSize: "20px 20px",
                 }}
               />
-              {/* Project ID label */}
-              <div className="relative z-10 text-center">
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70">
-                  {project.id}
-                </span>
-                <div className="mt-2 h-8 w-8 mx-auto rounded-full border border-border flex items-center justify-center">
-                  <div className="h-2 w-2 rounded-full bg-primary/40" />
+              
+              {/* Project ID label - only if no image */}
+              {!currentGalleryItem?.image && (
+                <div className="relative z-30 text-center">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70">
+                    {project.id}
+                  </span>
+                  <div className="mt-2 h-8 w-8 mx-auto rounded-full border border-border flex items-center justify-center">
+                    <div className="h-2 w-2 rounded-full bg-primary/40" />
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* Counter badge */}
+              {project.gallery && project.gallery.length > 0 && (
+                <div className="absolute left-3 top-3 z-40">
+                  <span className="rounded-md border border-border/60 bg-background/60 px-2 py-0.5 text-[10px] font-mono text-muted-foreground backdrop-blur-sm">
+                    {currentIndex + 1} / {project.gallery.length}
+                  </span>
+                </div>
+              )}
+
+              {/* Image title overlay */}
+              {(currentGalleryItem?.imageLabel || currentGalleryItem?.title) && (
+                <div className="absolute bottom-0 left-0 right-0 z-40">
+                  <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent px-4 pt-6 pb-3">
+                    <p className="text-xs font-medium text-white/90 drop-shadow-md line-clamp-1">
+                      {currentGalleryItem.imageLabel || currentGalleryItem.title}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -126,9 +199,36 @@ export function ProjectCard({ project, index, isInView, onViewGallery }: Project
             </h3>
 
             {/* Description */}
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {project.description}
-            </p>
+            <div className="text-sm leading-relaxed text-muted-foreground min-h-[8rem]">
+              {currentGalleryItem?.title ? (
+                <span className="text-foreground font-medium block mb-2 text-base line-clamp-1">
+                  {currentGalleryItem.title}
+                </span>
+              ) : null}
+              
+              {/* Handling ID/EN splitting for either gallery or main description */}
+              {(() => {
+                const desc = currentGalleryItem?.description || project.description;
+                if (desc.includes("EN 🇬🇧:")) {
+                  const parts = desc.split("EN 🇬🇧:");
+                  return (
+                    <div className="space-y-3">
+                      <div className="relative pl-3 border-l border-primary/40 line-clamp-3">
+                        <Linkify text={parts[0].replace("ID 🇮🇩:", "").trim()} />
+                      </div>
+                      <div className="relative pl-3 border-l border-accent/40 opacity-80 text-xs line-clamp-2">
+                        <Linkify text={parts[1].trim()} />
+                      </div>
+                    </div>
+                  );
+                }
+                return (
+                  <div className="line-clamp-5">
+                    <Linkify text={desc} />
+                  </div>
+                );
+              })()}
+            </div>
 
             {/* Tech tags */}
             <div className="flex flex-wrap gap-2">

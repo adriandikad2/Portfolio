@@ -11,6 +11,17 @@ export function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [cardIndices, setCardIndices] = useState<Record<string, number>>({});
+
+  const handleCloseGallery = (finalIndex: number) => {
+    if (selectedProject) {
+      setCardIndices((prev) => ({
+        ...prev,
+        [selectedProject.id]: finalIndex,
+      }));
+    }
+    setSelectedProject(null);
+  };
 
   return (
     <section id="projects" ref={sectionRef} className="relative py-32 px-6">
@@ -53,6 +64,10 @@ export function ProjectsSection() {
               project={project}
               index={idx}
               isInView={isInView}
+              currentIndex={cardIndices[project.id] || 0}
+              onIndexChange={(newIndex) => 
+                setCardIndices(prev => ({ ...prev, [project.id]: newIndex }))
+              }
               onViewGallery={() => setSelectedProject(project)}
             />
           ))}
@@ -61,7 +76,7 @@ export function ProjectsSection() {
 
       <GalleryModal
         isOpen={selectedProject !== null}
-        onClose={() => setSelectedProject(null)}
+        onClose={handleCloseGallery}
         title={selectedProject?.title || ""}
         subtitle={selectedProject?.subtitle || ""}
         items={selectedProject?.gallery || []}
