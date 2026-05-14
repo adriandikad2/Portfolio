@@ -722,7 +722,7 @@ export const visualItems: VisualItem[] = [
     id: "roblox-1",
     title: "Maps",
     category: "Roblox Studio",
-    description: "Maps I made for fun. Scenes are made with ready-to-use assets from Roblox’s official model Marketplace.",
+    description: "Maps I made for fun. Scenes were made using ready-to-use assets from Roblox’s official model Marketplace.",
     image: "",
     color: "from-accent/20 to-chart-5/20",
     collections: [
@@ -918,12 +918,12 @@ export const visualItems: VisualItem[] = [
         image: "",
         color: "from-chart-2/20 to-accent/20",
         gallery: [
-          { id: "g-ma-1", title: "Kestari 1", image: "/projects/Graphic Design/Memory Album/Kestari1.webp", description: "", color: "from-chart-2/20 to-accent/20" },
-          { id: "g-ma-2", title: "Kestari 2", image: "/projects/Graphic Design/Memory Album/Kestari2.webp", description: "", color: "from-chart-2/20 to-accent/20" },
-          { id: "g-ma-3", title: "Litbang 1", image: "/projects/Graphic Design/Memory Album/Litbang1.webp", description: "", color: "from-chart-2/20 to-accent/20" },
-          { id: "g-ma-4", title: "PSDM 1", image: "/projects/Graphic Design/Memory Album/PSDM1.webp", description: "", color: "from-chart-2/20 to-accent/20" },
-          { id: "g-ma-5", title: "PSDM 2", image: "/projects/Graphic Design/Memory Album/PSDM2.webp", description: "", color: "from-chart-2/20 to-accent/20" },
-          { id: "g-ma-6", title: "PSDM 3", image: "/projects/Graphic Design/Memory Album/PSDM3.webp", description: "", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-1", title: "Kestari 1", image: "/projects/Graphic Design/Memory Album/Kestari1.webp", imageLabel: "Cover for the Secretariat Bureau alongside the Daily Management Board.", description: "ID 🇮🇩: Ini adalah cover untuk Biro Kesekretariatan beserta jajaran Badan Pengurus Harian, foto-foto kenangannya terdapat pada bagian kiri. EN 🇬🇧: This was the cover for the Secretariat Bureau and its Daily Management Board. I went with the theming of a Daycare because it is cute and I visualized it well before fully making it, and I was really proud of how this one turned out. This is my all-time favorite design.", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-2", title: "Kestari 2", image: "/projects/Graphic Design/Memory Album/Kestari2.webp", imageLabel: "This page showcases staffs from the Secretariat Bureau alongside their memorable photos.", description: "ID 🇮🇩: Page ini menampilkan staf-staf kepengurusan Biro Kesekretariatan beserta beberapa foto kenangan mereka. EN 🇬🇧: This page showcases staffs from the Secretariat Bureau alongside their memorable photos. I really liked decorating this page with various toys and kindergarten-themed ornaments. Really love the idea of sticking the photos onto a kids' drawer.", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-3", title: "Litbang 1", image: "/projects/Graphic Design/Memory Album/Litbang1.webp", imageLabel: "Cover for the Research and Development Department alongside its Daily Management Board.", description: "ID 🇮🇩: Cover ini bertema pantai atau seaside dengan kombinasi unik dengan frame jendela kapal sebagai frame foto para pengurus. EN 🇬🇧: This design combines a seaside/beach theme with a unique twist, featuring a ship window frame for the staff photos. I really like how the overall composition turned out. ", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-4", title: "PSDM 1", image: "/projects/Graphic Design/Memory Album/PSDM1.webp", imageLabel: "Cover for the Human Resources Development Bureau alongside the Daily Management Board.", description: "ID 🇮🇩: Tema untuk cover ini adalah alam sehingga saya menggunakan banyak foto aset flora untuk mendekorasi semua sudut page ini. EN 🇬🇧: The theme for this cover was nature, so I incorporated many flora assets to decorate every nook and crannies of this page. Absolutely loving how the frames of the Daily Management Board is shaped with all the singular flowers forming a massive flower arrangement.", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-5", title: "PSDM 2", image: "/projects/Graphic Design/Memory Album/PSDM2.webp", imageLabel: "This page showcases staffs from the Human Resources Development Bureau.", description: "ID 🇮🇩: Page ini menampilkan semua staf kepengurusan Biro PSDM. EN 🇬🇧: This page showcases staffs from the Human Resources Development Bureau.", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-6", title: "PSDM 3", image: "/projects/Graphic Design/Memory Album/PSDM3.webp", imageLabel: "This page showcases staffs from the Human Resources Development Bureau alongside their memorable photos.", description: "ID 🇮🇩: Di sini saya sempat berimprovisasi dengan menggunakan sebuah air terjun sebagai background untuk foto kenangan-kenangannya. EN 🇬🇧: Here I took the liberty to improvise by using a waterfall as the background for the memorable photos. Loves it.", color: "from-chart-2/20 to-accent/20" },
         ]
       },
       {
@@ -933,7 +933,7 @@ export const visualItems: VisualItem[] = [
         image: "/projects/Graphic Design/CampusActivityOrientation.webp",
         color: "from-accent/20 to-chart-1/20",
         gallery: [
-          { id: "g-co-1", title: "Final Design", image: "/projects/Graphic Design/CampusActivityOrientation.webp", description: "", color: "from-accent/20 to-chart-1/20" },
+          { id: "g-co-1", title: "Final Design", image: "/projects/Graphic Design/CampusActivityOrientation.webp", description: "ID 🇮🇩: Feeds ini diunggah di platform Instagram. Temanya berupa piknik. EN 🇬🇧: This feed was posted on Instagram. I was going for a theme relating to picnic, I like the overall design with the incorporation of all the elements.", color: "from-accent/20 to-chart-1/20" },
         ]
       }
     ]
