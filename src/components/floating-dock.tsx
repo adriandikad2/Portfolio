@@ -69,9 +69,21 @@ function DockIcon({
 }) {
   const [hovered, setHovered] = useState(false);
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (item.href.startsWith("#")) {
+      e.preventDefault();
+      const targetId = item.href.slice(1);
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <a
       href={item.href}
+      onClick={handleClick}
       className="relative flex flex-col items-center"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

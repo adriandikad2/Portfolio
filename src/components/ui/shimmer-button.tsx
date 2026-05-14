@@ -21,6 +21,18 @@ export function ShimmerButton({
   href,
   target,
 }: ShimmerButtonProps) {
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (href?.startsWith("#")) {
+      e.preventDefault();
+      const targetId = href.slice(1);
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    onClick?.();
+  };
+
   const content = (
     <motion.span
       className={cn(
@@ -33,7 +45,7 @@ export function ShimmerButton({
       )}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      onClick={onClick}
+      onClick={!href ? onClick : undefined}
     >
       {/* Shimmer sweep */}
       <span className="absolute inset-0 -translate-x-full animate-[shimmer_2.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
@@ -54,6 +66,7 @@ export function ShimmerButton({
         href={href} 
         target={target} 
         rel={target === "_blank" ? "noopener noreferrer" : undefined}
+        onClick={handleAnchorClick}
       >
         {content}
       </a>
@@ -78,6 +91,18 @@ export function OutlineButton({
   href,
   target,
 }: OutlineButtonProps) {
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (href?.startsWith("#")) {
+      e.preventDefault();
+      const targetId = href.slice(1);
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    onClick?.();
+  };
+
   const content = (
     <motion.span
       className={cn(
@@ -91,7 +116,7 @@ export function OutlineButton({
       )}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      onClick={onClick}
+      onClick={!href ? onClick : undefined}
     >
       {/* Moving border effect */}
       <span className="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -114,6 +139,7 @@ export function OutlineButton({
         href={href} 
         target={target} 
         rel={target === "_blank" ? "noopener noreferrer" : undefined}
+        onClick={handleAnchorClick}
       >
         {content}
       </a>

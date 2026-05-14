@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -31,36 +31,83 @@ export function GalleryModal({
   items,
 }: GalleryModalProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isClosing, setIsClosing] = useState(false);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen) {
       setCurrentIndex(0);
+      setIsClosing(false);
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
     }
+    
     return () => {
-      document.body.style.overflow = "auto";
+      // Only restore scroll to auto if this was the last modal closing
+      // We check if there's any other modal overlay present in the DOM
+      const otherModals = document.querySelectorAll('[role="dialog"], .fixed.inset-0.z-\\[100\\]');
+      if (otherModals.length <= 1) {
+        document.body.style.overflow = "auto";
+      }
     };
   }, [isOpen]);
 
   const safeIndex = currentIndex >= items.length ? 0 : currentIndex;
   const currentItem = items[safeIndex];
 
-  const handleClose = () => {
-    onClose(safeIndex);
-  };
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsClosing(false);
+      onClose(safeIndex);
+    }, 250);
+  }, [onClose, safeIndex]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isOpen) return;
+      if (!isOpen || isClosing) return;
       if (e.key === "Escape") handleClose();
       if (e.key === "ArrowRight") setCurrentIndex((prev) => (prev + 1) % items.length);
       if (e.key === "ArrowLeft") setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, items.length, onClose]);
+  }, [isOpen, isClosing, items.length, handleClose]);
+
+  // Scroll wheel navigation
+  useEffect(() => {
+    if (!isOpen || isClosing || items.length <= 1) return;
+
+    let scrollCooldown = false;
+
+    const handleWheel = (e: WheelEvent) => {
+      // Only handle if the scroll is on the image area or the modal backdrop
+      if (scrollCooldown) return;
+      
+      e.preventDefault();
+      scrollCooldown = true;
+
+      if (e.deltaY > 0) {
+        setCurrentIndex((prev) => (prev + 1) % items.length);
+      } else if (e.deltaY < 0) {
+        setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
+      }
+
+      setTimeout(() => {
+        scrollCooldown = false;
+      }, 200);
+    };
+
+    const container = imageContainerRef.current;
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: false });
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener("wheel", handleWheel);
+      }
+    };
+  }, [isOpen, isClosing, items.length]);
 
   if (!isOpen || !items || items.length === 0) return null;
 
@@ -76,12 +123,13 @@ export function GalleryModal({
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isOpen && !isClosing && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 p-4 sm:p-6 backdrop-blur-md"
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-[110] flex items-center justify-center bg-background/90 p-4 sm:p-6 backdrop-blur-md"
           onClick={handleClose}
         >
           <motion.div
@@ -101,11 +149,11 @@ export function GalleryModal({
             </button>
 
             {/* Left side: Image Viewer */}
-            <div className="relative flex flex-1 items-center justify-center bg-background p-4 lg:p-8">
+            <div ref={imageContainerRef} className="relative flex flex-1 flex-col bg-background p-4 lg:p-6">
               {/* Image Container */}
               <div
                 className={cn(
-                  "relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl border border-border/60 bg-gradient-to-br",
+                  "relative flex flex-1 items-center justify-center overflow-hidden rounded-xl border border-border/60 bg-gradient-to-br",
                   currentItem.color || "from-secondary to-background"
                 )}
               >
@@ -179,27 +227,38 @@ export function GalleryModal({
                 </AnimatePresence>
               </div>
 
-              {/* Navigation Controls over image */}
+              {/* Navigation Controls BELOW image */}
               {items.length > 1 && (
-                <>
+                <div className="flex items-center justify-center gap-6 py-4">
                   <button
                     onClick={handlePrev}
-                    className="absolute left-6 top-1/2 z-20 flex -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/80 p-3 text-foreground backdrop-blur-sm transition-all hover:border-primary/40 hover:text-primary hover:shadow-[0_0_15px_rgba(0,212,255,0.2)]"
+                    className="flex items-center justify-center rounded-full border border-border bg-background/80 p-2.5 text-foreground backdrop-blur-sm transition-all hover:border-primary/40 hover:text-primary hover:shadow-[0_0_15px_rgba(0,212,255,0.1)]"
                   >
-                    <ChevronLeft className="h-6 w-6" />
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    className="absolute right-6 top-1/2 z-20 flex -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/80 p-3 text-foreground backdrop-blur-sm transition-all hover:border-primary/40 hover:text-primary hover:shadow-[0_0_15px_rgba(0,212,255,0.2)]"
-                  >
-                    <ChevronRight className="h-6 w-6" />
+                    <ChevronLeft className="h-5 w-5" />
                   </button>
                   
-                  {/* Image Counter Badge */}
-                  <div className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2 rounded-full border border-border bg-background/80 px-4 py-1.5 font-mono text-xs text-muted-foreground backdrop-blur-sm">
-                    {currentIndex + 1} / {items.length}
+                  {/* Stylish Dots (Instagram-style) */}
+                  <div className="flex items-center gap-1.5 px-2">
+                    {items.map((_, idx) => (
+                      <motion.div
+                        key={idx}
+                        animate={{
+                          width: currentIndex === idx ? 16 : 6,
+                          backgroundColor: currentIndex === idx ? "var(--primary)" : "rgba(161, 161, 170, 0.3)",
+                        }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="h-1.5 rounded-full"
+                      />
+                    ))}
                   </div>
-                </>
+
+                  <button
+                    onClick={handleNext}
+                    className="flex items-center justify-center rounded-full border border-border bg-background/80 p-2.5 text-foreground backdrop-blur-sm transition-all hover:border-primary/40 hover:text-primary hover:shadow-[0_0_15px_rgba(0,212,255,0.1)]"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
               )}
             </div>
 

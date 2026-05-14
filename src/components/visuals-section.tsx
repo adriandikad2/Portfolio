@@ -175,15 +175,15 @@ function VisualCard({
           <TechTag tag={item.category} className="uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-background/80 backdrop-blur-sm border-white/10" />
         </div>
 
-        {/* Hover overlay */}
-        <div className="absolute inset-0 flex items-end bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-40">
-          <div className="w-full p-4">
+        {/* Hover overlay - Stronger gradient for legibility */}
+        <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-40">
+          <div className="w-full p-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-foreground">
+                <p className="text-sm font-semibold text-white drop-shadow-md">
                   {item.title}
                 </p>
-                <div className="text-[11px] text-muted-foreground line-clamp-2 hover:line-clamp-none transition-all duration-300">
+                <div className="text-[11px] text-white/80 line-clamp-2 hover:line-clamp-none transition-all duration-300 drop-shadow-sm">
                   {(() => {
                     const desc = currentCollection?.description || item.description;
                     if (desc.includes("EN 🇬🇧:")) {
@@ -191,7 +191,7 @@ function VisualCard({
                       return (
                         <div className="flex flex-col gap-1">
                           <span><Linkify text={parts[0].replace("ID 🇮🇩:", "").trim()} /></span>
-                          <span className="opacity-60 border-t border-muted-foreground/20 pt-1 mt-0.5">
+                          <span className="opacity-70 border-t border-white/20 pt-1 mt-1">
                             <Linkify text={parts[1].trim()} />
                           </span>
                         </div>
@@ -203,19 +203,29 @@ function VisualCard({
               </div>
             </div>
             <div className="mt-4">
-              <span className="block text-base font-bold text-primary/80 transition-colors duration-300 group-hover:text-primary text-center">
+              <span className="block text-sm font-bold text-primary drop-shadow-[0_0_8px_rgba(0,212,255,0.4)] text-center uppercase tracking-wider">
                 Click to explore collections
               </span>
             </div>
           </div>
         </div>
 
-        {/* Category badge */}
-        <div className="absolute left-3 top-3 z-50">
-          <span className="rounded-md border border-border/60 bg-background/60 px-2 py-0.5 text-[10px] font-mono text-muted-foreground backdrop-blur-sm">
-            {safeIndex + 1} / {item.collections.length}
-          </span>
-        </div>
+        {/* Stylish Dots (Instagram-style) */}
+        {item.collections.length > 1 && (
+          <div className="absolute bottom-3 left-1/2 z-50 -translate-x-1/2 flex items-center gap-1 px-1.5 py-1 rounded-full bg-black/20 backdrop-blur-sm border border-white/5">
+            {item.collections.map((_, idx) => (
+              <motion.div
+                key={idx}
+                animate={{
+                  width: safeIndex === idx ? 10 : 4,
+                  backgroundColor: safeIndex === idx ? "var(--primary)" : "rgba(255, 255, 255, 0.3)",
+                }}
+                transition={{ duration: 0.3 }}
+                className="h-1 rounded-full"
+              />
+            ))}
+          </div>
+        )}
 
         {/* Image title overlay */}
         {currentCollection?.title && (

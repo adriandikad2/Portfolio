@@ -102,7 +102,7 @@ export function ProjectCard({
 
         <div
           className={cn(
-            "relative z-10 flex flex-col gap-6 rounded-xl bg-background/80 p-6 sm:p-8",
+            "relative z-10 flex flex-col gap-6 rounded-xl bg-background/95 p-6 sm:p-8",
             "lg:flex-row lg:items-center lg:gap-10",
             isReversed && "lg:flex-row-reverse"
           )}
@@ -169,12 +169,20 @@ export function ProjectCard({
                 </div>
               )}
 
-              {/* Counter badge */}
-              {project.gallery && project.gallery.length > 0 && (
-                <div className="absolute left-3 top-3 z-40">
-                  <span className="rounded-md border border-border/60 bg-background/60 px-2 py-0.5 text-[10px] font-mono text-muted-foreground backdrop-blur-sm">
-                    {currentIndex + 1} / {project.gallery.length}
-                  </span>
+              {/* Stylish Dots (Instagram-style) */}
+              {project.gallery && project.gallery.length > 1 && (
+                <div className="absolute bottom-4 left-1/2 z-40 -translate-x-1/2 flex items-center gap-1.5 px-2 py-1.5 rounded-full bg-black/20 backdrop-blur-sm border border-white/10">
+                  {project.gallery.map((_, idx) => (
+                    <motion.div
+                      key={idx}
+                      animate={{
+                        width: currentIndex === idx ? 12 : 5,
+                        backgroundColor: currentIndex === idx ? "var(--primary)" : "rgba(255, 255, 255, 0.4)",
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="h-1 rounded-full"
+                    />
+                  ))}
                 </div>
               )}
 
@@ -194,45 +202,55 @@ export function ProjectCard({
           {/* Content */}
           <div className="flex-1 space-y-4">
             {/* Subtitle */}
-            <span className="inline-block font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+            <span className="inline-block font-mono text-[10px] uppercase tracking-[0.2em] text-primary font-semibold">
               {project.subtitle}
             </span>
 
             {/* Title */}
-            <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl drop-shadow-sm">
               {project.title}
             </h3>
 
-            {/* Description */}
-            <div className="text-sm leading-relaxed text-muted-foreground min-h-[8rem]">
-              {currentGalleryItem?.title ? (
-                <span className="text-foreground font-medium block mb-2 text-base line-clamp-1">
-                  {currentGalleryItem.title}
-                </span>
-              ) : null}
-              
-              {/* Handling ID/EN splitting for either gallery or main description */}
-              {(() => {
-                const desc = currentGalleryItem?.description || project.description;
-                if (desc.includes("EN 🇬🇧:")) {
-                  const parts = desc.split("EN 🇬🇧:");
-                  return (
-                    <div className="space-y-3">
-                      <div className="relative pl-3 border-l border-primary/40 line-clamp-3">
-                        <Linkify text={parts[0].replace("ID 🇮🇩:", "").trim()} />
+            {/* Description - Fixed height and strict line-clamp for stability */}
+            <div className="text-sm leading-relaxed text-foreground/90 min-h-[10.5rem] flex flex-col">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={safeIndex}
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-4"
+                >
+                  {currentGalleryItem?.title && (
+                    <span className="text-primary font-semibold block mb-1 text-base line-clamp-1">
+                      {currentGalleryItem.title}
+                    </span>
+                  )}
+                  
+                  {(() => {
+                    const desc = currentGalleryItem?.description || project.description;
+                    if (desc.includes("EN 🇬🇧:")) {
+                      const parts = desc.split("EN 🇬🇧:");
+                      return (
+                        <div className="space-y-3">
+                          <div className="relative pl-3 border-l-2 border-primary/50 text-foreground line-clamp-3">
+                            <Linkify text={parts[0].replace("ID 🇮🇩:", "").trim()} />
+                          </div>
+                          <div className="relative pl-3 border-l-2 border-accent/30 text-muted-foreground text-[12px] italic line-clamp-2">
+                            <Linkify text={parts[1].trim()} />
+                          </div>
+                        </div>
+                      );
+                    }
+                    return (
+                      <div className="line-clamp-5 text-foreground/80">
+                        <Linkify text={desc} />
                       </div>
-                      <div className="relative pl-3 border-l border-accent/40 opacity-80 text-xs line-clamp-2">
-                        <Linkify text={parts[1].trim()} />
-                      </div>
-                    </div>
-                  );
-                }
-                return (
-                  <div className="line-clamp-5">
-                    <Linkify text={desc} />
-                  </div>
-                );
-              })()}
+                    );
+                  })()}
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Tech tags */}
