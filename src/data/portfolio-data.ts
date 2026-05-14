@@ -142,6 +142,7 @@ export function getSkillColor(tagName: string): SkillColor {
     "neon": "rose",
     "neon db": "rose",
     "database": "rose",
+    "cloudinary": "rose",
 
     // 🎨 Design Tools (emerald)
     "figma": "emerald",
@@ -166,6 +167,9 @@ export function getSkillColor(tagName: string): SkillColor {
     "vite": "sky",
     "html": "sky",
     "css": "sky",
+    "tailwind": "sky",
+    "node.js": "sky",
+    "express": "sky",
 
     // ⚡ Fullstack & Systems (violet)
     "next.js": "violet",
@@ -327,7 +331,7 @@ export const projects: Project[] = [
     subtitle: "libGDX's Homage to Diep.io",
     description:
       "A Java-based 2D game built on the libGDX framework. Implements core engine mechanics including custom rendering pipelines, entity-component systems, and real-time collision detection — all running at 60fps.",
-    tags: ["Java", "libGDX", "2D Rendering"],
+    tags: ["Java", "Game Logic Design", "libGDX", "2D Rendering", "Vibe Coding"],
     links: [
       { label: "View Source", href: "https://github.com/adriandikad2/Die.io" },
       { label: "Play on Itch.io", href: "https://adriandikad2.itch.io/dieio" },
@@ -351,7 +355,7 @@ export const projects: Project[] = [
     subtitle: "Full-Stack Web Application",
     description:
       "A production-grade web application leveraging serverless architecture on Vercel. UGCLeaks bridges official Roblox Web APIs with schedules.",
-    tags: ["Next.js", "Vercel", "PostgreSQL", "Neon DB", "API Bridge", "Serverless", "Roblox", "Antigravity", "Vibe Coding", "UI/UX"],
+    tags: ["TypeScript", "JavaScript", "React", "Tailwind", "Vercel", "PostgreSQL", "Neon DB", "Next.js", "API Bridge", "Serverless", "Roblox", "Antigravity", "Vibe Coding", "UI/UX"],
     links: [
       { label: "Visit UGCLeaks", href: "https://ugcleaks.vercel.app/" },
     ],
@@ -430,7 +434,7 @@ export const projects: Project[] = [
     subtitle: "Gartic Phone's Unofficial Sequel",
     description:
       "A production-grade web application delivering real-time multiplayer drawing experiences. Features real-time state synchronization and low-latency interactions built for performance at scale.",
-    tags: ["Next.js", "Vercel", "V0", "Neon DB", "PostgreSQL", "Real-time", "Multiplayer", "UI/UX"],
+    tags: ["JavaScript", "React", "Vite", "Express", "Node.js", "CSS", "Tailwind", "Vercel", "Neon DB", "Cloudinary", "PostgreSQL", "Real-time", "Multiplayer", "UI/UX", "V0", "Vibe Coding"],
     links: [
       { label: "View Source", href: "https://github.com/adriandikad2/DrawBattle" },
       { label: "Visit Drawbattle (Website is discontinued)", href: "https://drawbattle.vercel.app/" },
@@ -718,7 +722,7 @@ export const visualItems: VisualItem[] = [
     id: "roblox-1",
     title: "Maps",
     category: "Roblox Studio",
-    description: "Maps I made for fun. Most are made with ready-to-use assets from Roblox's official model Marketplace.",
+    description: "Maps I made for fun. Scenes are made with ready-to-use assets from Roblox’s official model Marketplace.",
     image: "",
     color: "from-accent/20 to-chart-5/20",
     collections: [
@@ -881,24 +885,20 @@ export const visualItems: VisualItem[] = [
       {
         id: "sims-1-c1",
         title: "Daycare-themed Room",
-        description: "Practicing the game's building tools while aiming for a daycare-styled room.",
+        description: "The first room I've practiced interior design in. Mostly using Maxis' official assets.",
         image: "",
         color: "from-chart-3/20 to-primary/20",
         gallery: [
-          {
-            id: "s1-g1",
-            title: "Living Area",
-            image: "", // Gallery image
-            description: "An open-plan living space utilizing moveobjects for custom shelving and plant placements.",
-            color: "from-chart-3/20 to-primary/20",
-          },
-          {
-            id: "s1-g2",
-            title: "Kitchen Layout",
-            image: "", // Gallery image
-            description: "Industrial style kitchen featuring exposed brick and overhead custom lighting.",
-            color: "from-primary/20 to-chart-3/20",
-          }
+          { id: "sims-daycare-c1", title: "Cinematic 1", image: "/projects/Sims/DaycareRoom/cinematic1.webp", description: "", color: "from-chart-3/20 to-primary/20" },
+          { id: "sims-daycare-c2", title: "Cinematic 2", image: "/projects/Sims/DaycareRoom/cinematic2.webp", description: "", color: "from-chart-3/20 to-primary/20" },
+          { id: "sims-daycare-c3", title: "Cinematic 3", image: "/projects/Sims/DaycareRoom/cinematic3.webp", description: "", color: "from-chart-3/20 to-primary/20" },
+          { id: "sims-daycare-c4", title: "Cinematic 4", image: "/projects/Sims/DaycareRoom/cinematic4.webp", description: "", color: "from-chart-3/20 to-primary/20" },
+          { id: "sims-daycare-c5", title: "Cinematic 5", image: "/projects/Sims/DaycareRoom/cinematic5.webp", description: "", color: "from-chart-3/20 to-primary/20" },
+          { id: "sims-daycare-c6", title: "Cinematic 6", image: "/projects/Sims/DaycareRoom/cinematic6.webp", description: "", color: "from-chart-3/20 to-primary/20" },
+          { id: "sims-daycare-p1", title: "POV 1", image: "/projects/Sims/DaycareRoom/pov1.webp", description: "", color: "from-chart-3/20 to-primary/20" },
+          { id: "sims-daycare-p2", title: "POV 2", image: "/projects/Sims/DaycareRoom/pov2.webp", description: "", color: "from-chart-3/20 to-primary/20" },
+          { id: "sims-daycare-p3", title: "POV 3", image: "/projects/Sims/DaycareRoom/pov3.webp", description: "", color: "from-chart-3/20 to-primary/20" },
+          { id: "sims-daycare-p4", title: "POV 4", image: "/projects/Sims/DaycareRoom/pov4.webp", description: "", color: "from-chart-3/20 to-primary/20" },
         ]
       }
     ]

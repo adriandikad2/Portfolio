@@ -191,11 +191,11 @@ function CollectionCard({
           </div>
         )}
 
-        {/* Overlay - Stronger bottom gradient for text legibility */}
-        <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
+        {/* Overlay - Gradient for text legibility without obscuring too much */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
         
         {/* Content */}
-        <div className="absolute bottom-0 left-0 right-0 z-30 p-5 backdrop-blur-[2px]">
+        <div className="absolute bottom-0 left-0 right-0 z-30 p-5">
           <h3 className="mb-1 text-lg font-semibold text-white drop-shadow-md">
             {collection.title}
           </h3>
@@ -204,10 +204,7 @@ function CollectionCard({
               {collection.description}
             </p>
           )}
-          <div className="mt-3 flex items-center justify-between">
-            <span className="rounded-full border border-white/20 bg-black/60 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
-              {collection.gallery.length} Item{collection.gallery.length !== 1 ? 's' : ''}
-            </span>
+          <div className="mt-3 flex items-center justify-end">
             <span className="text-xs font-medium text-primary drop-shadow-md opacity-0 transition-opacity group-hover:opacity-100">
               View Gallery →
             </span>

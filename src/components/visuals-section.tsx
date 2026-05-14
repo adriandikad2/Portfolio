@@ -93,21 +93,35 @@ function VisualCard({
   onIndexChange: (index: number) => void;
   onClick: () => void;
 }) {
+  const isSingleCollection = item.collections.length === 1;
+  const rotationItems = isSingleCollection 
+    ? item.collections[0].gallery 
+    : item.collections;
+  
+  const rotationLength = rotationItems.length;
+
   useEffect(() => {
-    if (item.collections.length <= 1) return;
+    if (rotationLength <= 1) return;
     
     const interval = setInterval(() => {
-      onIndexChange((currentIndex + 1) % item.collections.length);
+      onIndexChange((currentIndex + 1) % rotationLength);
     }, 5000);
     
     return () => clearInterval(interval);
-  }, [currentIndex, item.collections.length, onIndexChange]);
+  }, [currentIndex, rotationLength, onIndexChange]);
 
-  const safeIndex = item.collections && item.collections.length > 0 
-    ? (currentIndex >= item.collections.length ? 0 : currentIndex) 
+  const safeIndex = rotationLength > 0 
+    ? (currentIndex >= rotationLength ? 0 : currentIndex) 
     : 0;
-  const currentCollection = item.collections[safeIndex];
-  const currentImage = currentCollection?.image || currentCollection?.gallery[0]?.image || item.image;
+
+  const currentCollection = isSingleCollection 
+    ? item.collections[0] 
+    : item.collections[safeIndex];
+
+  const currentImage = isSingleCollection
+    ? currentCollection?.gallery[safeIndex]?.image || currentCollection?.image || item.image
+    : currentCollection?.image || currentCollection?.gallery[0]?.image || item.image;
+
   const currentColor = currentCollection?.color || item.color;
 
   return (
@@ -211,9 +225,9 @@ function VisualCard({
         </div>
 
         {/* Stylish Dots (Instagram-style) */}
-        {item.collections.length > 1 && (
+        {rotationLength > 1 && (
           <div className="absolute bottom-3 left-1/2 z-50 -translate-x-1/2 flex items-center gap-1 px-1.5 py-1 rounded-full bg-black/20 backdrop-blur-sm border border-white/5">
-            {item.collections.map((_, idx) => (
+            {rotationItems.map((_, idx) => (
               <motion.div
                 key={idx}
                 animate={{
