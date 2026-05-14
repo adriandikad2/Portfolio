@@ -238,7 +238,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "clutter",
-    title: "CLUTTER",
+    title: "CLUTTER (Under Development)",
     subtitle: "Most Ambitious Roblox Project",
     description:
       "A fully-realized Roblox experience built from the ground up with Luau scripting. Features complex game logic systems, custom physics interactions, and tightly integrated 3D assets — all designed for engaging, session-based gameplay.",
@@ -455,36 +455,17 @@ export const projects: Project[] = [
         color: "from-chart-2/20 to-secondary/20"
       },
     ]
-  },
-  {
-    id: "the-visuals",
-    title: "The Visuals",
-    subtitle: "3D Art & Environment Design",
-    description:
-      "A curated showcase of creative work spanning 3D Blender models, interior environment designs in Roblox Studio and The Sims 4, and digital graphic design projects including the Memory Album series.",
-    tags: ["Blender", "Roblox Studio", "Sims 4", "Graphic Design"],
-    links: [
-      { label: "View Gallery Section", href: "#visuals" },
-    ],
-    image: "", // Main card image
-    gallery: [
-      {
-        id: "visuals-1",
-        title: "3D Environments",
-        image: "", // Gallery image
-        description: "A comprehensive look at complex 3D environments built in Blender.",
-        color: "from-chart-3/20 to-secondary/20"
-      },
-      {
-        id: "visuals-2",
-        title: "Interior Renders",
-        image: "", // Gallery image
-        description: "High fidelity interior renders showcasing lighting and textures.",
-        color: "from-chart-4/20 to-secondary/20"
-      }
-    ]
-  },
+  }
 ];
+
+export interface VisualCollection {
+  id: string;
+  title: string;
+  description: string;
+  image?: string;
+  color?: string;
+  gallery: GalleryItem[];
+}
 
 export interface VisualItem {
   id: string;
@@ -493,154 +474,135 @@ export interface VisualItem {
   description: string;
   color: string;
   image?: string;
-  gallery: GalleryItem[];
+  collections: VisualCollection[];
 }
 
 export const visualItems: VisualItem[] = [
   {
     id: "blender-1",
-    title: "3D Character Model",
+    title: "Assets",
     category: "Blender",
-    description: "High-poly character model with PBR textures",
-    image: "", // Main card image
+    description: "Low-poly props and assets.",
+    image: "",
     color: "from-primary/20 to-chart-4/20",
-    gallery: [
+    collections: [
       {
-        id: "b1-g1",
-        title: "Front Orthographic",
-        image: "", // Gallery image
-        description: "Front view of the character model showing clean edge flow and topology optimized for animation.",
+        id: "blender-1-c1", 
+        title: "Low-Poly 3D Assets",
+        description: "A collection of 15+ low-poly props sharing a single texture atlas for mobile optimization.",
+        image: "",
         color: "from-primary/20 to-chart-4/20",
-      },
-      {
-        id: "b1-g2",
-        title: "Wireframe Overlay",
-        image: "", // Gallery image
-        description: "Wireframe rendering demonstrating the polygon density and edge loop placement around joints.",
-        color: "from-chart-4/20 to-primary/20",
-      },
-      {
-        id: "b1-g3",
-        title: "PBR Textures",
-        image: "", // Gallery image
-        description: "Close-up shot of the materials, highlighting the roughness and normal maps baked in Substance Painter.",
-        color: "from-accent/20 to-primary/20",
+        gallery: [
+          {
+            id: "b1-g1",
+            title: "3D Assets",
+            image: "",
+            description: "Low-poly assets used for CLUTTER.",
+            color: "from-primary/20 to-chart-4/20",
+          }
+        ]
       }
     ]
   },
   {
-    id: "roblox-env-1",
-    title: "Game Environment",
+    id: "roblox-1",
+    title: "Maps",
     category: "Roblox Studio",
-    description: "Detailed interior environment for CLUTTER",
+    description: "Maps I made for fun",
     image: "", // Main card image
     color: "from-accent/20 to-chart-5/20",
-    gallery: [
+    collections: [
       {
-        id: "re1-g1",
-        title: "Main Lobby",
-        image: "", // Gallery image
-        description: "The central hub area featuring custom lighting, volumetric fog, and optimized PBR assets.",
+        id: "roblox-1-c1",
+        title: "Map 1",
+        description: "",
+        image: "",
         color: "from-accent/20 to-chart-5/20",
-      },
-      {
-        id: "re1-g2",
-        title: "Corridor Lighting",
-        image: "", // Gallery image
-        description: "A showcase of the dynamic lighting setup and shadow mapping used throughout the hallways.",
-        color: "from-chart-5/20 to-accent/20",
+        gallery: [
+          {
+            id: "re1-g1",
+            title: "Main Lobby",
+            image: "", // Gallery image
+            description: "The central hub area featuring custom lighting, volumetric fog, and optimized PBR assets.",
+            color: "from-accent/20 to-chart-5/20",
+          },
+          {
+            id: "re1-g2",
+            title: "Corridor Lighting",
+            image: "", // Gallery image
+            description: "A showcase of the dynamic lighting setup and shadow mapping used throughout the hallways.",
+            color: "from-chart-5/20 to-accent/20",
+          }
+        ]
       }
     ]
   },
   {
     id: "sims-1",
-    title: "Interior Design — Modern Loft",
+    title: "Interior Design",
     category: "The Sims 4",
-    description: "Contemporary loft with custom furniture placement",
+    description: "Interior Design with In-game Assets.",
     image: "", // Main card image
     color: "from-chart-3/20 to-primary/20",
-    gallery: [
+    collections: [
       {
-        id: "s1-g1",
-        title: "Living Area",
-        image: "", // Gallery image
-        description: "An open-plan living space utilizing moveobjects for custom shelving and plant placements.",
+        id: "sims-1-c1",
+        title: "Daycare-themed Room",
+        description: "Practicing the game's building tools while aiming for a daycare-styled room.",
+        image: "",
         color: "from-chart-3/20 to-primary/20",
-      },
-      {
-        id: "s1-g2",
-        title: "Kitchen Layout",
-        image: "", // Gallery image
-        description: "Industrial style kitchen featuring exposed brick and overhead custom lighting.",
-        color: "from-primary/20 to-chart-3/20",
+        gallery: [
+          {
+            id: "s1-g1",
+            title: "Living Area",
+            image: "", // Gallery image
+            description: "An open-plan living space utilizing moveobjects for custom shelving and plant placements.",
+            color: "from-chart-3/20 to-primary/20",
+          },
+          {
+            id: "s1-g2",
+            title: "Kitchen Layout",
+            image: "", // Gallery image
+            description: "Industrial style kitchen featuring exposed brick and overhead custom lighting.",
+            color: "from-primary/20 to-chart-3/20",
+          }
+        ]
       }
     ]
   },
   {
     id: "graphic-1",
-    title: "Memory Album Cover",
+    title: "Memory Album Design",
     category: "Graphic Design",
     description: "Digital album art with photo manipulation",
     image: "", // Main card image
     color: "from-chart-2/20 to-accent/20",
-    gallery: [
+    collections: [
       {
-        id: "g1-g1",
-        title: "Final Cover",
-        image: "", // Gallery image
-        description: "The finalized album artwork featuring deep color grading and overlay textures.",
+        id: "graphic-1-c1",
+        title: "Daycare-themed Album Design",
+        description: "This was the best graphic design I've ever done in my lifetime. Really proud of how it turned out.",
+        image: "",
         color: "from-chart-2/20 to-accent/20",
-      },
-      {
-        id: "g1-g2",
-        title: "Typography Variants",
-        image: "", // Gallery image
-        description: "Alternative typography explorations for the album title and artist name.",
-        color: "from-accent/20 to-[#f472b6]/20",
+        gallery: [
+          {
+            id: "g1-g1",
+            title: "Final Cover",
+            image: "", // Gallery image
+            description: "Made in collaboration with an organization I used to work at.",
+            color: "from-chart-2/20 to-accent/20",
+          },
+          {
+            id: "g1-g2",
+            title: "Typography Variants",
+            image: "", // Gallery image
+            description: "Alternative typography explorations for the album title and artist name.",
+            color: "from-accent/20 to-[#f472b6]/20",
+          }
+        ]
       }
     ]
-  },
-  {
-    id: "blender-2",
-    title: "Environment Props",
-    category: "Blender",
-    description: "Low-poly game-ready props collection",
-    image: "", // Main card image
-    color: "from-chart-4/20 to-primary/20",
-    gallery: [
-      {
-        id: "b2-g1",
-        title: "Prop Sheet",
-        image: "", // Gallery image
-        description: "A collection of 15+ low-poly props sharing a single texture atlas for mobile optimization.",
-        color: "from-chart-4/20 to-primary/20",
-      }
-    ]
-  },
-  {
-    id: "roblox-env-2",
-    title: "Map Design — Arena",
-    category: "Roblox Studio",
-    description: "Competitive arena layout with dynamic lighting",
-    image: "", // Main card image
-    color: "from-chart-5/20 to-accent/20",
-    gallery: [
-      {
-        id: "re2-g1",
-        title: "Top-Down View",
-        image: "", // Gallery image
-        description: "Level design overview showing the three-lane structure and choke points.",
-        color: "from-chart-5/20 to-accent/20",
-      },
-      {
-        id: "re2-g2",
-        title: "Spawn Area",
-        image: "", // Gallery image
-        description: "The detailed spawn room featuring team-specific coloring and directional signage.",
-        color: "from-accent/20 to-chart-5/20",
-      }
-    ]
-  },
+  }
 ];
 
 export const socialLinks = [

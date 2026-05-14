@@ -3,8 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { GalleryModal } from "@/components/ui/gallery-modal";
-import type { GalleryItem } from "@/data/portfolio-data";
+import { CollectionsModal } from "@/components/ui/collections-modal";
 import { Linkify } from "@/components/ui/linkify";
 import { TechTag } from "@/components/ui/tech-tag";
 
@@ -17,13 +16,7 @@ export function VisualsSection() {
   const [selectedItem, setSelectedItem] = useState<VisualItem | null>(null);
   const [cardIndices, setCardIndices] = useState<Record<string, number>>({});
 
-  const handleCloseGallery = (finalIndex: number) => {
-    if (selectedItem) {
-      setCardIndices((prev) => ({
-        ...prev,
-        [selectedItem.id]: finalIndex,
-      }));
-    }
+  const handleCloseGallery = () => {
     setSelectedItem(null);
   };
 
@@ -74,13 +67,10 @@ export function VisualsSection() {
         </div>
       </div>
 
-      {/* New Gallery Modal */}
-      <GalleryModal
+      <CollectionsModal
         isOpen={selectedItem !== null}
         onClose={handleCloseGallery}
-        title={selectedItem?.title || ""}
-        subtitle={selectedItem?.category || ""}
-        items={selectedItem?.gallery || []}
+        item={selectedItem}
       />
     </section>
   );
@@ -104,21 +94,21 @@ function VisualCard({
   onClick: () => void;
 }) {
   useEffect(() => {
-    if (item.gallery.length <= 1) return;
+    if (item.collections.length <= 1) return;
     
     const interval = setInterval(() => {
-      onIndexChange((currentIndex + 1) % item.gallery.length);
+      onIndexChange((currentIndex + 1) % item.collections.length);
     }, 5000);
     
     return () => clearInterval(interval);
-  }, [currentIndex, item.gallery.length, onIndexChange]);
+  }, [currentIndex, item.collections.length, onIndexChange]);
 
-  const safeIndex = item.gallery && item.gallery.length > 0 
-    ? (currentIndex >= item.gallery.length ? 0 : currentIndex) 
+  const safeIndex = item.collections && item.collections.length > 0 
+    ? (currentIndex >= item.collections.length ? 0 : currentIndex) 
     : 0;
-  const currentGalleryItem = item.gallery[safeIndex];
-  const currentImage = currentGalleryItem?.image || item.image;
-  const currentColor = currentGalleryItem?.color || item.color;
+  const currentCollection = item.collections[safeIndex];
+  const currentImage = currentCollection?.image || currentCollection?.gallery[0]?.image || item.image;
+  const currentColor = currentCollection?.color || item.color;
 
   return (
     <motion.div
@@ -195,7 +185,7 @@ function VisualCard({
                 </p>
                 <div className="text-[11px] text-muted-foreground line-clamp-2 hover:line-clamp-none transition-all duration-300">
                   {(() => {
-                    const desc = currentGalleryItem?.description || item.description;
+                    const desc = currentCollection?.description || item.description;
                     if (desc.includes("EN 🇬🇧:")) {
                       const parts = desc.split("EN 🇬🇧:");
                       return (
@@ -214,7 +204,7 @@ function VisualCard({
             </div>
             <div className="mt-4">
               <span className="block text-base font-bold text-primary/80 transition-colors duration-300 group-hover:text-primary text-center">
-                Click to see more
+                Click to explore collections
               </span>
             </div>
           </div>
@@ -223,16 +213,16 @@ function VisualCard({
         {/* Category badge */}
         <div className="absolute left-3 top-3 z-50">
           <span className="rounded-md border border-border/60 bg-background/60 px-2 py-0.5 text-[10px] font-mono text-muted-foreground backdrop-blur-sm">
-            {safeIndex + 1} / {item.gallery.length}
+            {safeIndex + 1} / {item.collections.length}
           </span>
         </div>
 
         {/* Image title overlay */}
-        {(currentGalleryItem?.imageLabel || currentGalleryItem?.title) && (
+        {currentCollection?.title && (
           <div className="absolute bottom-0 left-0 right-0 z-50">
             <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent px-3 pt-5 pb-2.5">
               <p className="text-[10px] font-medium text-white/90 drop-shadow-md line-clamp-1">
-                {currentGalleryItem.imageLabel || currentGalleryItem.title}
+                {currentCollection.title}
               </p>
             </div>
           </div>

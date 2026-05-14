@@ -111,12 +111,16 @@ export function GalleryModal({
               >
                 {/* Preload next/prev images to prevent delay when rapidly clicking */}
                 <div className="hidden">
-                  {items.length > 1 && (
-                    <>
-                      <img src={items[(safeIndex + 1) % items.length]?.image} alt="" />
-                      <img src={items[(safeIndex - 1 + items.length) % items.length]?.image} alt="" />
-                    </>
-                  )}
+                  {items.length > 1 && (() => {
+                    const nextImg = items[(safeIndex + 1) % items.length]?.image;
+                    const prevImg = items[(safeIndex - 1 + items.length) % items.length]?.image;
+                    return (
+                      <>
+                        {nextImg && <img src={nextImg} alt="" />}
+                        {prevImg && <img src={prevImg} alt="" />}
+                      </>
+                    );
+                  })()}
                 </div>
                 {/* Grid pattern placeholder */}
                 <div

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import {
   Home,
-  Crosshair,
   FolderKanban,
   ImageIcon,
   Mail,
@@ -13,7 +12,6 @@ import { cn } from "@/lib/utils";
 
 const dockItems = [
   { label: "Home", href: "#hero", icon: Home },
-  { label: "Skills", href: "#skills", icon: Crosshair },
   { label: "Projects", href: "#projects", icon: FolderKanban },
   { label: "Visuals", href: "#visuals", icon: ImageIcon },
   { label: "Contact", href: "#contact", icon: Mail },

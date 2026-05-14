@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown, FileText } from "lucide-react";
-import { MouseSpotlight } from "@/components/ui/spotlight";
-import { Particles } from "@/components/ui/particles";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { ShimmerButton, OutlineButton } from "@/components/ui/shimmer-button";
 
@@ -13,20 +11,6 @@ export function HeroSection() {
       id="hero"
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
     >
-      {/* Background layers */}
-      <MouseSpotlight />
-      <Particles quantity={50} />
-
-      {/* Grid overlay */}
-      <div
-        className="absolute inset-0 z-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
-
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
         {/* Status badge */}
@@ -103,3 +87,4 @@ export function HeroSection() {
     </section>
   );
 }
+

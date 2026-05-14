@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 const socialLinks = [
   {
     label: "GitHub",
-    href: "https://github.com",
+    href: "https://github.com/adriandikad2",
     icon: GithubIcon,
     color: "#e4e4e7",
   },
   {
     label: "YouTube",
-    href: "https://youtube.com",
+    href: "https://www.youtube.com/@Randm",
     icon: YoutubeIcon,
     color: "#ff0000",
   },
@@ -27,7 +27,7 @@ const socialLinks = [
   },
   {
     label: "Email",
-    href: "mailto:hello@adrian.dev",
+    href: "mailto:adriandikad@gmail.com",
     icon: Mail,
     color: "#a855f7",
   },
@@ -84,6 +84,8 @@ export function ContactSection() {
             <motion.a
               key={link.label}
               href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
               initial={{ opacity: 0, scale: 0 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{
