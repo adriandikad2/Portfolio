@@ -434,7 +434,7 @@ export const projects: Project[] = [
     subtitle: "Gartic Phone's Unofficial Sequel",
     description:
       "A production-grade web application delivering real-time multiplayer drawing experiences. Features real-time state synchronization and low-latency interactions built for performance at scale.",
-    tags: ["JavaScript", "React", "Vite", "Express", "Node.js", "CSS", "Tailwind", "Vercel", "Neon DB", "Cloudinary", "PostgreSQL", "Real-time", "Multiplayer", "UI/UX", "GitHub", "V0", "Vibe Coding"],
+    tags: ["JavaScript", "React", "Vite", "Express", "Node.js", "CSS", "Tailwind", "Vercel", "Neon DB", "Cloudinary", "PostgreSQL", "Real-time", "Multiplayer", "GitHub", "V0", "Vibe Coding", "UI/UX"],
     links: [
       { label: "View Source", href: "https://github.com/adriandikad2/DrawBattle" },
       { label: "Visit Drawbattle (Website is discontinued)", href: "https://drawbattle.vercel.app/" },
@@ -879,7 +879,7 @@ export const visualItems: VisualItem[] = [
     title: "Interior Design",
     category: "The Sims 4",
     description: "Interior Design with In-game Assets.",
-    image: "", // Main card image
+    image: "",
     color: "from-chart-3/20 to-primary/20",
     collections: [
       {
