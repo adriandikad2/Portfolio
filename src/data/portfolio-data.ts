@@ -331,7 +331,7 @@ export const projects: Project[] = [
     subtitle: "libGDX's Homage to Diep.io",
     description:
       "A Java-based 2D game built on the libGDX framework. Implements core engine mechanics including custom rendering pipelines, entity-component systems, and real-time collision detection — all running at 60fps.",
-    tags: ["Java", "Game Logic Design", "libGDX", "2D Rendering", "Vibe Coding"],
+    tags: ["Java", "Game Logic Design", "libGDX", "2D Rendering", "GitHub", "Vibe Coding"],
     links: [
       { label: "View Source", href: "https://github.com/adriandikad2/Die.io" },
       { label: "Play on Itch.io", href: "https://adriandikad2.itch.io/dieio" },
@@ -355,7 +355,7 @@ export const projects: Project[] = [
     subtitle: "Full-Stack Web Application",
     description:
       "A production-grade web application leveraging serverless architecture on Vercel. UGCLeaks bridges official Roblox Web APIs with schedules.",
-    tags: ["TypeScript", "JavaScript", "React", "Tailwind", "Vercel", "PostgreSQL", "Neon DB", "Next.js", "API Bridge", "Serverless", "Roblox", "Antigravity", "Vibe Coding", "UI/UX"],
+    tags: ["TypeScript", "JavaScript", "React", "Tailwind", "Vercel", "PostgreSQL", "Neon DB", "Next.js", "API Bridge", "Serverless", "Roblox", "GitHub", "Antigravity", "Vibe Coding", "UI/UX"],
     links: [
       { label: "Visit UGCLeaks", href: "https://ugcleaks.vercel.app/" },
     ],
@@ -434,7 +434,7 @@ export const projects: Project[] = [
     subtitle: "Gartic Phone's Unofficial Sequel",
     description:
       "A production-grade web application delivering real-time multiplayer drawing experiences. Features real-time state synchronization and low-latency interactions built for performance at scale.",
-    tags: ["JavaScript", "React", "Vite", "Express", "Node.js", "CSS", "Tailwind", "Vercel", "Neon DB", "Cloudinary", "PostgreSQL", "Real-time", "Multiplayer", "UI/UX", "V0", "Vibe Coding"],
+    tags: ["JavaScript", "React", "Vite", "Express", "Node.js", "CSS", "Tailwind", "Vercel", "Neon DB", "Cloudinary", "PostgreSQL", "Real-time", "Multiplayer", "UI/UX", "GitHub", "V0", "Vibe Coding"],
     links: [
       { label: "View Source", href: "https://github.com/adriandikad2/DrawBattle" },
       { label: "Visit Drawbattle (Website is discontinued)", href: "https://drawbattle.vercel.app/" },
@@ -905,33 +905,35 @@ export const visualItems: VisualItem[] = [
   },
   {
     id: "graphic-1",
-    title: "Memory Album Design",
+    title: "Graphic Design",
     category: "Graphic Design",
     description: "Digital album art with photo manipulation",
-    image: "", // Main card image
+    image: "",
     color: "from-chart-2/20 to-accent/20",
     collections: [
       {
-        id: "graphic-1-c1",
-        title: "Daycare-themed Album Design",
+        id: "graphic-memory-album",
+        title: "Memory Album Design",
         description: "This was the best graphic design I've ever done in my lifetime. Really proud of how it turned out.",
         image: "",
         color: "from-chart-2/20 to-accent/20",
         gallery: [
-          {
-            id: "g1-g1",
-            title: "Final Cover",
-            image: "", // Gallery image
-            description: "Made in collaboration with an organization I used to work at.",
-            color: "from-chart-2/20 to-accent/20",
-          },
-          {
-            id: "g1-g2",
-            title: "Typography Variants",
-            image: "", // Gallery image
-            description: "Alternative typography explorations for the album title and artist name.",
-            color: "from-accent/20 to-[#f472b6]/20",
-          }
+          { id: "g-ma-1", title: "Kestari 1", image: "/projects/Graphic Design/Memory Album/Kestari1.webp", description: "", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-2", title: "Kestari 2", image: "/projects/Graphic Design/Memory Album/Kestari2.webp", description: "", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-3", title: "Litbang 1", image: "/projects/Graphic Design/Memory Album/Litbang1.webp", description: "", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-4", title: "PSDM 1", image: "/projects/Graphic Design/Memory Album/PSDM1.webp", description: "", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-5", title: "PSDM 2", image: "/projects/Graphic Design/Memory Album/PSDM2.webp", description: "", color: "from-chart-2/20 to-accent/20" },
+          { id: "g-ma-6", title: "PSDM 3", image: "/projects/Graphic Design/Memory Album/PSDM3.webp", description: "", color: "from-chart-2/20 to-accent/20" },
+        ]
+      },
+      {
+        id: "graphic-campus-orientation",
+        title: "Campus Activity Orientation Group",
+        description: "A design suited for a campus activity orientation event for my group.",
+        image: "/projects/Graphic Design/CampusActivityOrientation.png",
+        color: "from-accent/20 to-chart-1/20",
+        gallery: [
+          { id: "g-co-1", title: "Final Design", image: "/projects/Graphic Design/CampusActivityOrientation.png", description: "", color: "from-accent/20 to-chart-1/20" },
         ]
       }
     ]

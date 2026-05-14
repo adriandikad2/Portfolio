@@ -50,8 +50,8 @@ export function ProjectsSection() {
               Featured Work
             </span>
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
-            A curated selection of projects spanning game development,
+          <p className="mt-8 text-muted-foreground max-w-lg mx-auto">
+            A curated selection of projects spanning <br />game development,
             full-stack engineering, and creative design.
           </p>
         </motion.div>

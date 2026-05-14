@@ -171,7 +171,7 @@ export function ProjectCard({
 
               {/* Stylish Dots (Instagram-style) */}
               {project.gallery && project.gallery.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 z-40 -translate-x-1/2 flex items-center gap-1.5 px-2 py-1.5 rounded-full bg-black/20 backdrop-blur-sm border border-white/10">
+                <div className="absolute bottom-12 left-1/2 z-40 -translate-x-1/2 flex items-center gap-1.5 px-2 py-1.5 rounded-full bg-black/20 backdrop-blur-sm border border-white/10">
                   {project.gallery.map((_, idx) => (
                     <motion.div
                       key={idx}

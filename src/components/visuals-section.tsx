@@ -40,12 +40,11 @@ export function VisualsSection() {
           </span>
           <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
             <span className="bg-gradient-to-r from-[#e4e4e7] to-[#a1a1aa] bg-clip-text text-transparent">
-              The Visual Portfolio
+              Visual Portfolio
             </span>
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
-            3D modeling, environment design, and digital media — the creative
-            side of game development.
+          <p className="mt-8 text-muted-foreground max-w-lg mx-auto">
+            3D modeling, environment design, and <br />digital media, alongside content creation.
           </p>
         </motion.div>
 
@@ -184,9 +183,12 @@ function VisualCard({
           }}
         />
 
-        {/* Center label */}
+        {/* Center label - Original Category */}
         <div className="absolute inset-0 flex items-center justify-center z-30">
-          <TechTag tag={item.category} className="uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-background/80 backdrop-blur-sm border-white/10" />
+          <TechTag 
+            tag={item.category} 
+            className="uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(0,0,0,0.5)] bg-background/80 backdrop-blur-sm border-white/10 px-4" 
+          />
         </div>
 
         {/* Hover overlay - Stronger gradient for legibility */}
@@ -195,7 +197,7 @@ function VisualCard({
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold text-white drop-shadow-md">
-                  {item.title}
+                  {currentCollection?.title || item.title}
                 </p>
                 <div className="text-[11px] text-white/80 line-clamp-2 hover:line-clamp-none transition-all duration-300 drop-shadow-sm">
                   {(() => {
@@ -218,7 +220,7 @@ function VisualCard({
             </div>
             <div className="mt-4">
               <span className="block text-sm font-bold text-primary drop-shadow-[0_0_8px_rgba(0,212,255,0.4)] text-center uppercase tracking-wider">
-                Click to explore collections
+                Click me!
               </span>
             </div>
           </div>
@@ -226,7 +228,7 @@ function VisualCard({
 
         {/* Stylish Dots (Instagram-style) */}
         {rotationLength > 1 && (
-          <div className="absolute bottom-3 left-1/2 z-50 -translate-x-1/2 flex items-center gap-1 px-1.5 py-1 rounded-full bg-black/20 backdrop-blur-sm border border-white/5">
+          <div className="absolute bottom-10 left-1/2 z-50 -translate-x-1/2 flex items-center gap-1 px-1.5 py-1 rounded-full bg-black/20 backdrop-blur-sm border border-white/5">
             {rotationItems.map((_, idx) => (
               <motion.div
                 key={idx}
@@ -241,16 +243,14 @@ function VisualCard({
           </div>
         )}
 
-        {/* Image title overlay */}
-        {currentCollection?.title && (
-          <div className="absolute bottom-0 left-0 right-0 z-50">
-            <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent px-3 pt-5 pb-2.5">
-              <p className="text-[10px] font-medium text-white/90 drop-shadow-md line-clamp-1">
-                {currentCollection.title}
-              </p>
-            </div>
+        {/* Image title overlay - Card Title */}
+        <div className="absolute bottom-0 left-0 right-0 z-50">
+          <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent px-3 pt-5 pb-2.5">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-white/90 drop-shadow-md line-clamp-1">
+              {item.title}
+            </p>
           </div>
-        )}
+        </div>
       </div>
     </motion.div>
   );
