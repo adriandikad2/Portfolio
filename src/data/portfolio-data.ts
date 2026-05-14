@@ -930,10 +930,10 @@ export const visualItems: VisualItem[] = [
         id: "graphic-campus-orientation",
         title: "Campus Activity Orientation Group",
         description: "A design suited for a campus activity orientation event for my group.",
-        image: "/projects/Graphic Design/CampusActivityOrientation.png",
+        image: "/projects/Graphic Design/CampusActivityOrientation.webp",
         color: "from-accent/20 to-chart-1/20",
         gallery: [
-          { id: "g-co-1", title: "Final Design", image: "/projects/Graphic Design/CampusActivityOrientation.png", description: "", color: "from-accent/20 to-chart-1/20" },
+          { id: "g-co-1", title: "Final Design", image: "/projects/Graphic Design/CampusActivityOrientation.webp", description: "", color: "from-accent/20 to-chart-1/20" },
         ]
       }
     ]
