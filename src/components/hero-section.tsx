@@ -67,7 +67,7 @@ export function HeroSection() {
                 Hellooo! I'm Adrian, a CompEng student based on University of Indonesia. I love everything gaming, arts, music, tech, and everything in between.
               </p>
               <p>
-                Major interests in game development from ideas and creations to market research, community building and managing to sound design, and confident singing in-between projects. Recently learnt <span className="text-luau font-medium">Luau</span> with physics mechanisms and <span className="text-nextjs font-medium">Next.js</span> for full-stack architectures with <span className="text-ai font-medium">AI</span>-assisted tools.
+                Major interests in game development from ideas and creations to market research, community building and managing to sound design, and confident singing in-between projects. Recently learnt <span className="text-luau font-medium">Luau</span> for physics mechanisms and <span className="text-nextjs font-medium">Next.js</span> for full-stack architectures with <span className="text-ai font-medium">AI</span>-assisted tools.
               </p>
             </motion.div>
 
