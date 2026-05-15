@@ -19,7 +19,6 @@ export const navItems = [
 
 export interface Skill {
   name: string;
-  level?: string;
 }
 
 export interface SkillCategory {
@@ -37,10 +36,9 @@ export const skillCategories: SkillCategory[] = [
     subtitle: "Complex game logic & engine mechanics",
     icon: Gamepad2,
     skills: [
-      { name: "Luau", level: "Advanced" },
-      { name: "Java / libGDX", level: "Intermediate" },
-      { name: "Game Logic Design" },
-      { name: "Physics Systems" },
+      { name: "Luau" },
+      { name: "Java" },
+      { name: "Game Logic" },
     ],
     color: "cyan",
     span: "small",
@@ -65,7 +63,8 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: "Blender" },
       { name: "Roblox Studio" },
-      { name: "The Sims 4 Building" },
+      { name: "Map & Level Design" },
+      { name: "Unity" }
     ],
     color: "indigo",
     span: "small",
@@ -75,9 +74,10 @@ export const skillCategories: SkillCategory[] = [
     subtitle: "Content creation & visual design",
     icon: Palette,
     skills: [
-      { name: "YouTube Content" },
-      { name: "Digital Graphic Design" },
-      { name: "UI/UX Design" },
+      { name: "YouTube" },
+      { name: "Graphic Design" },
+      { name: "UI/UX" },
+      { name: "Audio/Video Editing" }
     ],
     color: "emerald",
     span: "small",
