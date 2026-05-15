@@ -39,6 +39,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "Luau" },
       { name: "Java" },
       { name: "Game Logic" },
+      { name: "C#" }
     ],
     color: "cyan",
     span: "small",

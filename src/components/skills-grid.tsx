@@ -213,11 +213,6 @@ function SkillCard({
               )}
             >
               {skill.name}
-              {skill.level && (
-                <span className="ml-1 text-[9px] opacity-60">
-                  • {skill.level}
-                </span>
-              )}
             </span>
           ))}
         </div>
