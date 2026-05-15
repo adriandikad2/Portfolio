@@ -42,6 +42,33 @@ const colorMap = {
     glow: "rgba(52, 211, 153, 0.15)",
     tag: "bg-[#34d399]/10 text-[#34d399] border-[#34d399]/20",
   },
+  luau: {
+    border: "border-luau/20",
+    hoverBorder: "hover:border-luau/40",
+    bg: "bg-luau/5",
+    hoverBg: "hover:bg-luau/10",
+    text: "text-luau",
+    glow: "rgba(73, 139, 244, 0.15)",
+    tag: "bg-luau/10 text-luau border-luau/20",
+  },
+  nextjs: {
+    border: "border-nextjs/20",
+    hoverBorder: "hover:border-nextjs/40",
+    bg: "bg-nextjs/5",
+    hoverBg: "hover:bg-nextjs/10",
+    text: "text-nextjs",
+    glow: "rgba(69, 209, 95, 0.15)",
+    tag: "bg-nextjs/10 text-nextjs border-nextjs/20",
+  },
+  ai: {
+    border: "border-ai/20",
+    hoverBorder: "hover:border-ai/40",
+    bg: "bg-ai/5",
+    hoverBg: "hover:bg-ai/10",
+    text: "text-ai",
+    glow: "rgba(255, 244, 121, 0.15)",
+    tag: "bg-ai/10 text-ai border-ai/20",
+  },
 };
 
 export function SkillsGrid() {

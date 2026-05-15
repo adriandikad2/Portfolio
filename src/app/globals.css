@@ -10,6 +10,9 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-geist-sans);
+  --color-luau: var(--luau);
+  --color-nextjs: var(--nextjs);
+  --color-ai: var(--ai);
 
   /* Custom accent colors */
   --color-cyan-glow: #00d4ff;
@@ -69,6 +72,9 @@
   --popover: #12121a;
   --popover-foreground: #e4e4e7;
   --primary: #00d4ff;
+  --luau: #498bf4;
+  --nextjs: #45d15f;
+  --ai: #fff479;
   --primary-foreground: #0a0a0f;
   --secondary: #1a1a2e;
   --secondary-foreground: #e4e4e7;
