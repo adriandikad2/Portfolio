@@ -29,13 +29,15 @@ export function CollectionsModal({ isOpen, onClose, item }: CollectionsModalProp
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = "var(--scrollbar-width, 0px)";
     }
     
     return () => {
-      // Only restore scroll if no other modals are open (like the nested gallery)
-      const otherModals = document.querySelectorAll('.fixed.inset-0.z-\\[100\\], .fixed.inset-0.z-\\[110\\]');
+      // Only restore scroll if no other modals are open
+      const otherModals = document.querySelectorAll('.fixed.inset-0.z-\\[100\\], .fixed.inset-0.z-\\[110\\], [role="dialog"]');
       if (otherModals.length <= 1) {
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
       }
     };
   }, [isOpen]);
@@ -61,7 +63,7 @@ export function CollectionsModal({ isOpen, onClose, item }: CollectionsModalProp
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 p-4 sm:p-6 backdrop-blur-md"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 p-4 sm:p-6 backdrop-blur-md touch-none"
             onClick={handleClose}
           >
             <motion.div
@@ -69,13 +71,13 @@ export function CollectionsModal({ isOpen, onClose, item }: CollectionsModalProp
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative flex max-h-[85vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
+              className="relative flex max-h-[85vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl overscroll-none"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="flex items-center justify-between border-b border-border/50 bg-background/50 p-6 backdrop-blur-sm">
+              <div className="flex items-center justify-between border-b border-border/50 bg-background/50 p-5 sm:p-6 backdrop-blur-sm">
                 <div>
-                  <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+                  <h2 className="text-xl font-bold text-foreground sm:text-3xl">
                     {item.title}
                   </h2>
                   <p className="mt-1 font-mono text-sm text-primary">
@@ -91,7 +93,7 @@ export function CollectionsModal({ isOpen, onClose, item }: CollectionsModalProp
               </div>
 
               {/* Collections Grid */}
-              <div className="flex-1 overflow-y-auto p-6 sm:p-8">
+              <div className="flex-1 overflow-y-auto p-6 sm:p-8 overscroll-contain">
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {item.collections.map((collection, index) => (
                     <CollectionCard 
@@ -200,7 +202,7 @@ function CollectionCard({
             {collection.title}
           </h3>
           {collection.description && (
-            <p className="line-clamp-2 text-sm text-white/80 drop-shadow-sm">
+            <p className="line-clamp-2 text-sm text-foreground drop-shadow-sm">
               {collection.description}
             </p>
           )}

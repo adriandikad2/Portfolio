@@ -212,7 +212,7 @@ export function ProjectCard({
             </h3>
 
             {/* Description - Fixed height and strict line-clamp for stability */}
-            <div className="text-sm leading-relaxed text-foreground/90 min-h-[10.5rem] flex flex-col">
+            <div className="text-sm leading-relaxed text-foreground/90 min-h-[auto] sm:min-h-[10.5rem] flex flex-col">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={safeIndex}
@@ -223,7 +223,7 @@ export function ProjectCard({
                   className="space-y-4"
                 >
                   {currentGalleryItem?.title && (
-                    <span className="text-primary font-semibold block mb-1 text-base line-clamp-1">
+                    <span className="text-primary font-semibold block mb-1 text-sm sm:text-base line-clamp-1">
                       {currentGalleryItem.title}
                     </span>
                   )}
@@ -234,17 +234,17 @@ export function ProjectCard({
                       const parts = desc.split("EN 🇬🇧:");
                       return (
                         <div className="space-y-3">
-                          <div className="relative pl-3 border-l-2 border-primary/50 text-foreground line-clamp-3">
+                          <div className="relative pl-3 border-l-2 border-primary/50 text-foreground line-clamp-4 sm:line-clamp-3">
                             <Linkify text={parts[0].replace("ID 🇮🇩:", "").trim()} />
                           </div>
-                          <div className="relative pl-3 border-l-2 border-accent/30 text-muted-foreground text-[12px] italic line-clamp-2">
+                          <div className="relative pl-3 border-l-2 border-accent/30 text-foreground/90 text-[11px] sm:text-[12px] italic line-clamp-3 sm:line-clamp-2">
                             <Linkify text={parts[1].trim()} />
                           </div>
                         </div>
                       );
                     }
                     return (
-                      <div className="line-clamp-5 text-foreground/80">
+                      <div className="line-clamp-6 sm:line-clamp-5 text-foreground">
                         <Linkify text={desc} />
                       </div>
                     );

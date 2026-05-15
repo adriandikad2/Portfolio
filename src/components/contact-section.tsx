@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Globe, Mail, Heart } from "lucide-react";
-import { GithubIcon, YoutubeIcon } from "@/components/ui/brand-icons";
+import { Mail, Heart } from "lucide-react";
+import { GithubIcon, YoutubeIcon, DiscordIcon, LinkedinIcon } from "@/components/ui/brand-icons";
 import { cn } from "@/lib/utils";
 
 const socialLinks = [
@@ -20,16 +20,22 @@ const socialLinks = [
     color: "#ff0000",
   },
   {
-    label: "Portfolio",
-    href: "#hero",
-    icon: Globe,
-    color: "#00d4ff",
-  },
-  {
     label: "Email",
     href: "mailto:adriandikad@gmail.com",
     icon: Mail,
     color: "#a855f7",
+  },
+  {
+    label: "Discord",
+    href: "https://discord.com/users/409214212317904907",
+    icon: DiscordIcon,
+    color: "#5865F2",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/adrian-dika-18816a386/",
+    icon: LinkedinIcon,
+    color: "#0A66C2",
   },
 ];
 
@@ -62,12 +68,12 @@ export function ContactSection() {
           <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.25em] text-primary">
             // contact
           </span>
-          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
             <span className="bg-gradient-to-r from-[#e4e4e7] to-[#a1a1aa] bg-clip-text text-transparent">
               Let&apos;s Build Something
             </span>
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-md mx-auto">
+          <p className="mt-4 text-muted-foreground max-w-md mx-auto text-sm sm:text-base px-2">
             Interested in collaborating, have a question, or just want to connect?
             Reach out through any of these channels.
           </p>
@@ -78,7 +84,7 @@ export function ContactSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-12 flex items-center justify-center gap-4"
+          className="mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-6"
         >
           {socialLinks.map((link, idx) => (
             <motion.a
@@ -140,12 +146,10 @@ export function ContactSection() {
           <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#27272a] to-transparent" />
           <div className="mt-8 flex flex-col items-center gap-2">
             <p className="flex items-center gap-1.5 text-xs text-muted-foreground/70">
-              Built with
-              <Heart className="h-3 w-3 text-[#f43f5e] fill-[#f43f5e]" />
-              using Next.js, Tailwind CSS & Framer Motion
+              Built using Next.js, Tailwind CSS & Framer Motion
             </p>
             <p className="font-mono text-[10px] text-[#3f3f46]">
-              © {new Date().getFullYear()} Adrian. All rights reserved.
+              © {new Date().getFullYear()} Adrian Dika Darmawan.
             </p>
           </div>
         </motion.div>

@@ -38,13 +38,13 @@ export function VisualsSection() {
           <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.25em] text-chart-4">
             // visuals
           </span>
-          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
             <span className="bg-gradient-to-r from-[#e4e4e7] to-[#a1a1aa] bg-clip-text text-transparent">
               Visual Portfolio
             </span>
           </h2>
-          <p className="mt-8 text-muted-foreground max-w-lg mx-auto">
-            3D modeling, environment design, and <br />digital media, alongside content creation.
+          <p className="mt-8 text-muted-foreground max-w-lg mx-auto text-sm sm:text-base px-2">
+            3D modeling, environment design, and digital media, alongside content creation.
           </p>
         </motion.div>
 
@@ -197,11 +197,11 @@ function VisualCard({
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold text-white drop-shadow-md">
-                  {currentCollection?.title || item.title}
+                  {item.title}
                 </p>
                 <div className="text-[11px] text-white/80 line-clamp-2 hover:line-clamp-none transition-all duration-300 drop-shadow-sm">
                   {(() => {
-                    const desc = currentCollection?.description || item.description;
+                    const desc = item.description;
                     if (desc.includes("EN 🇬🇧:")) {
                       const parts = desc.split("EN 🇬🇧:");
                       return (
@@ -243,12 +243,25 @@ function VisualCard({
           </div>
         )}
 
-        {/* Image title overlay - Card Title */}
-        <div className="absolute bottom-0 left-0 right-0 z-50">
-          <div className="bg-gradient-to-t from-black/70 via-black/40 to-transparent px-3 pt-5 pb-2.5">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-white/90 drop-shadow-md line-clamp-1">
-              {item.title}
-            </p>
+        {/* Image title overlay - Collection Title */}
+        <div className="absolute bottom-0 left-0 right-0 z-50 pointer-events-none">
+          <div className="bg-gradient-to-t from-black/80 via-black/40 to-transparent px-3 pt-8 pb-3">
+            <AnimatePresence mode="popLayout">
+              <motion.p
+                key={currentCollection?.id || "default"}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: 0.35, // Delay to match the image transition peak
+                  ease: "easeOut" 
+                }}
+                className="text-[10px] font-mono uppercase tracking-[0.15em] text-white/90 drop-shadow-lg line-clamp-1"
+              >
+                {currentCollection?.title || item.title}
+              </motion.p>
+            </AnimatePresence>
           </div>
         </div>
       </div>

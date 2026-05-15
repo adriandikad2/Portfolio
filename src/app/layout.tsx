@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { siteConfig } from "@/data/portfolio-data";
 import "./globals.css";
@@ -37,6 +37,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0a0a0f",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -45,9 +52,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
     >
-      <body className="min-h-screen bg-background text-foreground overflow-x-hidden select-none">
+      <body className="min-h-screen bg-background text-foreground overflow-x-hidden select-none w-full max-w-[100vw]">
         {children}
       </body>
     </html>

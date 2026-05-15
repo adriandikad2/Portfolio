@@ -33,20 +33,30 @@ export function GalleryModal({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isClosing, setIsClosing] = useState(false);
   const imageContainerRef = useRef<HTMLDivElement>(null);
+  const infoPanelRef = useRef<HTMLDivElement>(null);
+
+  // Reset scroll position when items change
+  useEffect(() => {
+    if (infoPanelRef.current) {
+      infoPanelRef.current.scrollTop = 0;
+    }
+  }, [currentIndex]);
 
   useEffect(() => {
     if (isOpen) {
       setCurrentIndex(0);
       setIsClosing(false);
+      
+      // Only set overflow hidden on body, avoid height: 100% which causes jumps
       document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = "var(--scrollbar-width, 0px)";
     }
     
     return () => {
-      // Only restore scroll to auto if this was the last modal closing
-      // We check if there's any other modal overlay present in the DOM
       const otherModals = document.querySelectorAll('[role="dialog"], .fixed.inset-0.z-\\[100\\]');
       if (otherModals.length <= 1) {
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
       }
     };
   }, [isOpen]);
@@ -129,7 +139,7 @@ export function GalleryModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-[110] flex items-center justify-center bg-background/90 p-4 sm:p-6 backdrop-blur-md"
+          className="fixed inset-0 z-[110] flex items-center justify-center bg-background/90 p-4 sm:p-6 backdrop-blur-md touch-none"
           onClick={handleClose}
         >
           <motion.div
@@ -137,7 +147,7 @@ export function GalleryModal({
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative flex h-[85vh] w-full max-w-7xl flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl lg:flex-row"
+            className="relative flex h-[85vh] w-full max-w-7xl flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl lg:flex-row overscroll-none"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button - Absolute for mobile */}
@@ -206,30 +216,30 @@ export function GalleryModal({
                   )}
                 </AnimatePresence>
 
-                {/* Image title overlay */}
+                {/* Removed Absolute Overlay */}
+              </div>
+
+              {/* Image title - Moved here (between image and dots) */}
+              <div className="h-12 flex items-center justify-center px-4 overflow-hidden">
                 <AnimatePresence mode="popLayout">
                   {(currentItem.imageLabel || currentItem.title) && (
-                    <motion.div 
+                    <motion.p 
                       key={currentItem.imageLabel || currentItem.title}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
+                      exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.3 }}
-                      className="absolute bottom-0 left-0 right-0 z-20"
+                      className="text-sm font-medium text-foreground/80 line-clamp-2 text-center"
                     >
-                      <div className="bg-gradient-to-t from-black/60 via-black/30 to-transparent px-5 pt-8 pb-4">
-                        <p className="text-sm font-medium text-white/90 drop-shadow-md line-clamp-1">
-                          {currentItem.imageLabel || currentItem.title}
-                        </p>
-                      </div>
-                    </motion.div>
+                      {currentItem.imageLabel || currentItem.title}
+                    </motion.p>
                   )}
                 </AnimatePresence>
               </div>
 
               {/* Navigation Controls BELOW image */}
               {items.length > 1 && (
-                <div className="flex items-center justify-center gap-6 py-4">
+                <div className="flex items-center justify-center gap-6 py-2">
                   <button
                     onClick={handlePrev}
                     className="flex items-center justify-center rounded-full border border-border bg-background/80 p-2.5 text-foreground backdrop-blur-sm transition-all hover:border-primary/40 hover:text-primary hover:shadow-[0_0_15px_rgba(0,212,255,0.1)]"
@@ -281,7 +291,7 @@ export function GalleryModal({
                   {title}
                 </h2>
 
-                <div className="flex-1 overflow-y-auto pr-2 pb-8">
+                <div ref={infoPanelRef} className="flex-1 overflow-y-auto pr-2 pb-8 overscroll-contain">
                   <AnimatePresence mode="popLayout">
                     <motion.div 
                       key={currentItem.id || safeIndex}
@@ -296,14 +306,14 @@ export function GalleryModal({
                           {currentItem.title}
                         </h3>
                       )}
-                      <div className="text-muted-foreground leading-relaxed whitespace-pre-wrap text-sm">
+                      <div className="text-foreground leading-relaxed whitespace-pre-wrap text-sm">
                         {currentItem.description.includes("EN 🇬🇧:") ? (
                           <div className="space-y-4">
                             <div className="relative pl-4 border-l-2 border-primary/30 py-1">
                               <Linkify text={currentItem.description.split("EN 🇬🇧:")[0].replace("ID 🇮🇩:", "").trim()} />
                             </div>
                             <div className="h-px w-full bg-gradient-to-r from-border via-border/20 to-transparent my-4" />
-                            <div className="relative pl-4 border-l-2 border-accent/30 py-1 opacity-90">
+                            <div className="relative pl-4 border-l-2 border-accent/30 py-1 text-foreground/90">
                               <Linkify text={currentItem.description.split("EN 🇬🇧:")[1].trim()} />
                             </div>
                           </div>

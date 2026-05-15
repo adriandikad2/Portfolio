@@ -82,7 +82,7 @@ export function SkillsGrid() {
         </motion.div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[180px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-auto md:auto-rows-[180px]">
           {skillCategories.map((category, idx) => (
             <SkillCard key={category.title} category={category} index={idx} isInView={isInView} />
           ))}

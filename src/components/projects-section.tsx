@@ -45,13 +45,13 @@ export function ProjectsSection() {
           <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.25em] text-accent">
             // projects
           </span>
-          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
             <span className="bg-gradient-to-r from-[#e4e4e7] to-[#a1a1aa] bg-clip-text text-transparent">
               Featured Work
             </span>
           </h2>
-          <p className="mt-8 text-muted-foreground max-w-lg mx-auto">
-            A curated selection of projects spanning <br />game development,
+          <p className="mt-8 text-muted-foreground max-w-lg mx-auto text-sm sm:text-base px-2">
+            A curated selection of projects spanning game development,
             full-stack engineering, and creative design.
           </p>
         </motion.div>
