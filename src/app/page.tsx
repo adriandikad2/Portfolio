@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/hero-section";
+import { SkillsGrid } from "@/components/skills-grid";
 import { ProjectsSection } from "@/components/projects-section";
 import { VisualsSection } from "@/components/visuals-section";
 import { ContactSection } from "@/components/contact-section";
@@ -15,6 +16,7 @@ export default function Home() {
 
       <main className="relative z-10">
         <HeroSection />
+        <SkillsGrid />
         <ProjectsSection />
         <VisualsSection />
         <ContactSection />

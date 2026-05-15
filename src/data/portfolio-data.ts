@@ -1,4 +1,4 @@
-import { Server, Box, Palette, Gamepad2, Mail } from "lucide-react";
+import { Server, Box, Palette, Gamepad2, Mail, FileText } from "lucide-react";
 import { GithubIcon, YoutubeIcon, DiscordIcon, LinkedinIcon } from "@/components/ui/brand-icons";
 
 export const siteConfig = {
@@ -978,6 +978,7 @@ export const socialLinks = [
   { label: "GitHub", href: "https://github.com/adriandikad2", icon: GithubIcon },
   { label: "YouTube", href: "https://www.youtube.com/@Randm", icon: YoutubeIcon },
   { label: "Email", href: "mailto:adriandikad@gmail.com", icon: Mail },
-  { label: "Discord", href: "https://discord.com/users/_.ok", icon: DiscordIcon },
+  { label: "Discord", href: "https://discord.com/users/409214212317904907", icon: DiscordIcon },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/adrian-dika-18816a386/", icon: LinkedinIcon },
+  { label: "Resume", href: "https://github.com/adriandikad2/Portfolio/raw/main/public/Portfolio_AdrianDika.pdf", icon: FileText },
 ];

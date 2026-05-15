@@ -2,8 +2,9 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Mail, Heart } from "lucide-react";
+import { Mail, Heart, FileText } from "lucide-react";
 import { GithubIcon, YoutubeIcon, DiscordIcon, LinkedinIcon } from "@/components/ui/brand-icons";
+import { OutlineButton } from "@/components/ui/shimmer-button";
 import { cn } from "@/lib/utils";
 
 const socialLinks = [
@@ -36,6 +37,12 @@ const socialLinks = [
     href: "https://www.linkedin.com/in/adrian-dika-18816a386/",
     icon: LinkedinIcon,
     color: "#0A66C2",
+  },
+  {
+    label: "Resume",
+    href: "https://github.com/adriandikad2/Portfolio/raw/main/public/Portfolio_AdrianDika.pdf",
+    icon: FileText,
+    color: "#eab308",
   },
 ];
 
@@ -134,6 +141,23 @@ export function ContactSection() {
               </span>
             </motion.a>
           ))}
+        </motion.div>
+
+        {/* Resume Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-12"
+        >
+          <OutlineButton 
+            href="https://github.com/adriandikad2/Portfolio/raw/main/public/Portfolio_AdrianDika.pdf" 
+            target="_blank"
+            className="mx-auto"
+          >
+            <FileText className="h-4 w-4" />
+            Download Full Resume (PDF)
+          </OutlineButton>
         </motion.div>
 
         {/* Divider */}
