@@ -64,11 +64,10 @@ export function HeroSection() {
               className="mb-10 max-w-xl space-y-4 text-sm sm:text-lg text-foreground leading-relaxed"
             >
               <p>
-                Hellooo! I'm Adrian, a CompEng student based on University of Indonesia. I love 
+                Hellooo! I'm Adrian, a CompEng student based on University of Indonesia. I love everything gaming, arts, music, tech, and everything in between.
               </p>
               <p>
-                
-            Major interests in the whole process of game development from ideas and creations to market research, community building and managing to sound design, and confident singing in-between projects. Specializing in <span className="text-luau font-medium">Luau</span> physics systems and <span className="text-nextjs font-medium">Next.js</span> full-stack architectures with <span className="text-ai font-medium">AI</span>.
+                Major interests in game development from ideas and creations to market research, community building and managing to sound design, and confident singing in-between projects. Recently learnt <span className="text-luau font-medium">Luau</span> with physics mechanisms and <span className="text-nextjs font-medium">Next.js</span> for full-stack architectures with <span className="text-ai font-medium">AI</span>-assisted tools.
               </p>
             </motion.div>
 
