@@ -143,23 +143,6 @@ export function ContactSection() {
           ))}
         </motion.div>
 
-        {/* Resume Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-12"
-        >
-          <OutlineButton 
-            href="https://github.com/adriandikad2/Portfolio/raw/main/public/Portfolio_AdrianDika.pdf" 
-            target="_blank"
-            className="mx-auto"
-          >
-            <FileText className="h-4 w-4" />
-            Download Full Resume (PDF)
-          </OutlineButton>
-        </motion.div>
-
         {/* Divider */}
         <motion.div
           initial={{ opacity: 0 }}
